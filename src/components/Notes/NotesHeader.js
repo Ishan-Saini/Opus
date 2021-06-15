@@ -5,9 +5,9 @@ const NotesHeader = () => {
   return (
     <React.Fragment>
       <Input
-        input={{ placeholder: 'Title', type: 'text', id: 'input-title' }}
+        input={{ placeholder: 'TITLE', type: 'text', id: 'input-title' }}
       />
-      <Input input={{ placeholder: 'Tags', type: 'text', id: 'input-tags' }} />
+      <Input input={{ placeholder: 'TAGS', type: 'text', id: 'input-tags' }} />
     </React.Fragment>
   );
 };
