@@ -7,7 +7,7 @@ import Button from '../UI/Button';
 const SearchInput = () => {
   return (
     <form className={classes.form}>
-      <Input input={{ type: 'text', placeHolder: 'Search notes' }} />
+      <Input input={{ type: 'text', placeholder: 'Search notes' }} />
       <Button>
         <FaSistrix />
       </Button>

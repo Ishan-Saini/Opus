@@ -4,9 +4,9 @@
 
 body {
   margin: 0;
-  font-family: Helvetica;
+  font-family: 'Courier New';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(233, 232, 232);
   position: relative;
 }

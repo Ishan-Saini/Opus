@@ -1,0 +1,29 @@
+.editorWrapper {
+  position: relative;
+}
+
+.btn-header-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-rich {
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.5rem;
+}
+
+.btn-rich:not(.btn-rich:first-child) {
+  margin-left: 0.6rem;
+}
+
+.notesEditor {
+  border: 2px solid black;
+  height: 23rem;
+  max-height: 23rem;
+  cursor: text;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+  background-color: rgb(233, 233, 233);
+  overflow-y: auto;
+}
