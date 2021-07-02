@@ -1,13 +1,16 @@
 import React from 'react';
 import classes from './Header.module.css';
+import { FaRegStickyNote } from 'react-icons/fa';
+import { IconContext } from 'react-icons';
 
 const Header = () => {
   return (
-    <React.Fragment>
+    <IconContext.Provider value={{ color: 'white', size: '1.7rem' }}>
       <header className={classes.header}>
+        <FaRegStickyNote />
         <h2>OPUS</h2>
       </header>
-    </React.Fragment>
+    </IconContext.Provider>
   );
 };
 

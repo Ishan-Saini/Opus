@@ -2,16 +2,17 @@
   position: absolute;
   top: 7rem;
   left: 2rem;
+  width: 100%;
 }
 
 .form input {
   height: 35px;
-  width: 305px;
+  width: 80%;
   font-size: 1.1rem;
   padding: 0 7px;
 }
 
 .form button {
-  margin-left: 1.3rem;
+  margin-left: 1rem;
   padding: 8px 11px;
 }
