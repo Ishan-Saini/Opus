@@ -6,17 +6,18 @@ const useOutOfBoundsSelectionRecovery = (inFocus) => {
       return;
     }
     const handleOutsideMouseRelease = (e) => {
-      const vw = Math.max(
-        document.documentElement.clientWidth || 0,
-        window.innerWidth || 0
-      );
-      const vh = Math.max(
-        document.documentElement.clientHeight || 0,
-        window.innerHeight || 0
-      );
+      const vw = document.getElementById('editorContainer').clientWidth || 0;
+      const vh = document.getElementById('editorContainer').clientHeight || 0;
+      const pos = document
+        .getElementById('editorContainer')
+        .getBoundingClientRect();
+
       const isOutOfBounds =
-        Math.min(e.offsetX, e.offsetY) < 0 || e.offsetX > vw || e.offsetY > vh;
+        !(e.pageX > pos.left && e.pageX < pos.right) ||
+        !(e.pageY > pos.top && e.pageY < pos.bottom);
+
       if (isOutOfBounds) {
+        console.log(pos.left, pos.top, pos.right, pos.bottom);
         const root = document.getElementById('root');
         const mouseEvent = new MouseEvent('mouseup', {
           clientX: Math.min(vw, Math.max(0, e.clientX)),

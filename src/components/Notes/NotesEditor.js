@@ -19,9 +19,6 @@ const NotesEditor = () => {
     EditorState.createEmpty()
   );
 
-  const raw = convertToRaw(editorState.getCurrentContent());
-  console.log(raw);
-
   const editor = useRef(null);
   const focusEditor = () => {
     editor.current.focus();
@@ -81,7 +78,11 @@ const NotesEditor = () => {
           blockBtnStyle={toggleBlockStyle}
         />
       </div>
-      <div className={classes.notesEditor} onClick={focusEditor}>
+      <div
+        id="editorContainer"
+        className={classes.notesEditor}
+        onClick={focusEditor}
+      >
         <Editor
           ref={editor}
           editorState={editorState}
