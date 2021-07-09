@@ -1,4 +1,4 @@
-.form {
+.notes-wrapper {
   position: absolute;
   top: 7rem;
   right: 4rem;
@@ -10,7 +10,7 @@
   max-height: 78vh;
 }
 
-.form input:first-child {
+.notes-wrapper input:first-child {
   height: 2.4rem;
   width: 100%;
   font-size: 1.5rem;
@@ -19,12 +19,12 @@
   font-weight: 700;
 }
 
-.form input:first-child::placeholder {
+.notes-wrapper input:first-child::placeholder {
   font-weight: lighter;
   opacity: 0.5;
 }
 
-.form input:nth-child(2) {
+.notes-wrapper input:nth-child(2) {
   height: 2rem;
   width: 40%;
   font-size: 0.9rem;
@@ -32,8 +32,15 @@
   margin-bottom: 1.2rem;
 }
 
-.form input:nth-child(2)::placeholder {
+.notes-wrapper input:nth-child(2)::placeholder {
   opacity: 0.5;
+}
+
+.add-btn__wrapper {
+  display: block;
+  position: relative;
+  width: 100%;
+  min-height: 60px;
 }
 
 .btn-add {
@@ -41,5 +48,5 @@
   padding: 0.4rem 0.9rem;
   position: absolute;
   right: 0;
-  bottom: 0.1rem;
+  bottom: 0;
 }

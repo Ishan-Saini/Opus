@@ -10,11 +10,15 @@ const Notes = () => {
   };
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <div className={classes['notes-wrapper']}>
       <NotesHeader />
       <NotesEditor />
-      <Button className={classes['btn-add']}>Add</Button>
-    </form>
+      <div className={classes['add-btn__wrapper']}>
+        <Button className={classes['btn-add']} onClick={submitHandler}>
+          Add
+        </Button>
+      </div>
+    </div>
   );
 };
 

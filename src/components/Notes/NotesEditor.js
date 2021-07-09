@@ -5,15 +5,22 @@ import {
   RichUtils,
   getDefaultKeyBinding,
   KeyBindingUtil,
+  convertToRaw,
 } from 'draft-js';
 import classes from './NotesEditor.module.css';
 import 'draft-js/dist/Draft.css';
 import StyleButtons from './StyleButtons';
+import useOutOfBoundsSelectionRecovery from '../../hooks/use-OutOfBoundsSelectionRecovery';
 
 const NotesEditor = () => {
+  useOutOfBoundsSelectionRecovery(true);
+
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+
+  const raw = convertToRaw(editorState.getCurrentContent());
+  console.log(raw);
 
   const editor = useRef(null);
   const focusEditor = () => {
