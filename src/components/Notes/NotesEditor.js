@@ -5,7 +5,6 @@ import {
   RichUtils,
   getDefaultKeyBinding,
   KeyBindingUtil,
-  convertToRaw,
 } from 'draft-js';
 import classes from './NotesEditor.module.css';
 import 'draft-js/dist/Draft.css';
@@ -13,16 +12,22 @@ import StyleButtons from './StyleButtons';
 import useOutOfBoundsSelectionRecovery from '../../hooks/use-OutOfBoundsSelectionRecovery';
 
 const NotesEditor = () => {
-  useOutOfBoundsSelectionRecovery(true);
-
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-
   const editor = useRef(null);
   const focusEditor = () => {
     editor.current.focus();
   };
+
+  const [isFocus, setIsFocus] = useState(false);
+
+  const focusHandler = () => {
+    setIsFocus(true);
+  };
+
+  useOutOfBoundsSelectionRecovery(isFocus);
+
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
 
   const toggleInlineStyle = (e) => {
     e.preventDefault();
@@ -82,6 +87,7 @@ const NotesEditor = () => {
         id="editorContainer"
         className={classes.notesEditor}
         onClick={focusEditor}
+        onFocus={focusHandler}
       >
         <Editor
           ref={editor}
@@ -89,6 +95,7 @@ const NotesEditor = () => {
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
           keyBindingFn={keyBindingFunction}
+          placeholder="Start here..."
         />
       </div>
     </div>

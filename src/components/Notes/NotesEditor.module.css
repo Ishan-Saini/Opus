@@ -27,3 +27,7 @@
   background-color: #fff;
   overflow-y: auto;
 }
+
+.notesEditor .public-DraftEditorPlaceholder-root {
+  display: none;
+}
