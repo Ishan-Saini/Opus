@@ -68,6 +68,7 @@ let blockStyleArr = [
 const StyleButtons = (props) => {
   const inlineStyleBtns = inlineStyleArr.map((btn) => (
     <Button
+      type="button"
       key={btn.id}
       className={classes['btn-rich']}
       button={{
@@ -81,6 +82,7 @@ const StyleButtons = (props) => {
 
   const blockStyleBtns = blockStyleArr.map((btn) => (
     <Button
+      type="button"
       key={btn.id}
       className={classes['btn-rich']}
       button={{

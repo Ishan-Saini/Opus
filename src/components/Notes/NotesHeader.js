@@ -1,13 +1,31 @@
 import React from 'react';
-import Input from '../UI/Input';
+import classes from './NotesHeader.module.css';
 
-const NotesHeader = () => {
+const NotesHeader = (props) => {
+  const titleHandler = (e) => {
+    props.onTitleChange(e.target.value);
+  };
+
+  const tagsHandler = (e) => {
+    props.onTagsChange(e.target.value);
+  };
+
   return (
     <React.Fragment>
-      <Input
-        input={{ placeholder: 'TITLE', type: 'text', id: 'input-title' }}
+      <input
+        className={classes.input}
+        placeholder="TITLE"
+        type="text"
+        value={props.titleValue}
+        onChange={titleHandler}
       />
-      <Input input={{ placeholder: 'TAGS', type: 'text', id: 'input-tags' }} />
+      <input
+        className={classes.input}
+        placeholder="TAGS (max. 3)"
+        type="text"
+        value={props.tagsValue}
+        onChange={tagsHandler}
+      />
     </React.Fragment>
   );
 };

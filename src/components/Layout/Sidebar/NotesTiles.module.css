@@ -18,6 +18,7 @@
   display: inline-block;
   color: #fff;
   width: 100%;
+  cursor: pointer;
 }
 
 .notes-tile__tags {

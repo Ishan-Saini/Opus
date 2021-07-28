@@ -5,6 +5,7 @@
 .btn-header-wrapper {
   display: flex;
   flex-direction: row;
+  margin-top: 1rem;
 }
 
 .btn-rich {
@@ -18,16 +19,12 @@
 
 .notesEditor {
   border: 2px solid black;
-  height: 23rem;
-  max-height: 23rem;
+  height: 25rem;
+  max-height: 25rem;
   cursor: text;
   padding: 1rem;
   border-radius: 4px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
   background-color: #fff;
   overflow-y: auto;
-}
-
-.notesEditor .public-DraftEditorPlaceholder-root {
-  display: none;
 }
