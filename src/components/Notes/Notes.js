@@ -24,19 +24,27 @@ const Notes = () => {
     setEditorState(editorStateInstance);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const raw = convertToRaw(editorState.getCurrentContent());
+    const tagsArr = tags.replace(/ /g, '').split(',');
     if (title !== '') {
-      const tagsArr = tags.replace(/ /g, '').split(',');
-      const contentObj = {
-        title,
-        tags: tagsArr,
-        content: raw,
-      };
+      if (tagsArr.length <= 3) {
+        const contentObj = {
+          title,
+          tags: tagsArr,
+          content: raw,
+        };
+        const httpObj = JSON.stringify(contentObj);
 
-      console.log(contentObj);
-      console.log('Submitted');
+        await fetch('http://127.0.0.1:5000/api/v1/notes/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: httpObj,
+        });
+      }
     }
   };
 
