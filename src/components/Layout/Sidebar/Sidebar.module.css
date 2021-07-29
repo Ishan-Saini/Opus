@@ -1,16 +1,11 @@
 .sidebar-wrapper {
-  position: relative;
-  width: 25%;
-  max-width: 25%;
+  max-width: 90%;
 }
 
 .sidebar-notes__container {
   width: 100%;
   min-height: 70vh;
   background-color: rgb(206, 206, 206);
-  position: absolute;
-  top: 10rem;
-  left: 2rem;
   border-radius: 10px;
   padding: 0.5rem 0.5rem;
   overflow: auto;

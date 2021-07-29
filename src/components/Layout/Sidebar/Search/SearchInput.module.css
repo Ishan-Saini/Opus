@@ -1,13 +1,10 @@
 .form {
-  position: absolute;
-  top: 7rem;
-  left: 2rem;
-  width: 100%;
+  margin: 1rem 0;
 }
 
 .form input {
   height: 35px;
-  width: 83%;
+  width: 84%;
   font-size: 1.1rem;
   padding: 0 7px;
   border: none;

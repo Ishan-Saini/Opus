@@ -1,0 +1,38 @@
+.displayWrapper {
+  width: 100%;
+  max-width: 90%;
+  height: 100%;
+  max-height: 90%;
+  background-color: rgb(219, 219, 219);
+  box-shadow: 0px 10px 20px -9px rgba(0, 0, 0, 0.5);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.headerWrapper {
+  background-color: rgb(185, 185, 185);
+  padding: 1rem 1rem;
+}
+
+.titleWrapper h1 {
+  margin-bottom: 0.5rem;
+}
+
+.tagsWrapper {
+  margin-bottom: 0.8rem;
+}
+
+.tagsWrapper span {
+  background-color: #777;
+  color: #fff;
+  padding: 0.1rem;
+  font-size: 0.9rem;
+}
+
+.tagsWrapper span:not(:first-child) {
+  margin-left: 0.5rem;
+}
+
+.contentWrapper {
+  padding: 2rem 1.5rem;
+}

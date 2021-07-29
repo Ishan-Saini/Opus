@@ -1,13 +1,10 @@
 .notes-wrapper {
-  position: absolute;
-  top: 7rem;
-  right: 4rem;
   display: flex;
   flex-direction: column;
-  width: 70%;
-  max-width: 60%;
-  height: 78vh;
-  max-height: 78vh;
+  width: 100%;
+  max-width: 90%;
+  height: 100%;
+  max-height: 90%;
 }
 
 .notes-wrapper input:first-child {

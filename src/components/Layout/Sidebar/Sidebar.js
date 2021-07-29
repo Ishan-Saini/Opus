@@ -10,7 +10,6 @@ const Sidebar = () => {
       <div className={classes['sidebar-notes__container']}>
         <NotesTiles />
       </div>
-      ;
     </div>
   );
 };
