@@ -23,21 +23,25 @@ const DUMMY_ARR = [
 const NotesTiles = (props) => {
   const notesTileContent = DUMMY_ARR.map((tile) => {
     return (
-      <div className={classes['notes-tile']} key={tile.id}>
-        <div>
+      <li className={classes['notes-tile']} key={tile.id}>
+        <div className={classes.titleWrapper}>
           <p className={classes['notes-tile__title']}>{tile.title}</p>
+        </div>
+        <div className={classes.tagsWrapper}>
           {tile.tags.map((tag, index) => (
             <span key={index} className={classes['notes-tile__tags']}>
               {tag}
             </span>
           ))}
         </div>
-        <FaTrashAlt className={classes['trash-btn']} />
-      </div>
+        <div className={classes.btnWrapper}>
+          <FaTrashAlt className={classes['trash-btn']} />
+        </div>
+      </li>
     );
   });
 
-  return <React.Fragment>{notesTileContent}</React.Fragment>;
+  return <ul className={classes['notes-tile-wrapper']}>{notesTileContent}</ul>;
 };
 
 export default NotesTiles;
