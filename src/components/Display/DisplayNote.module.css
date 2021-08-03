@@ -7,6 +7,7 @@
   box-shadow: 0px 10px 20px -9px rgba(0, 0, 0, 0.5);
   overflow-x: hidden;
   overflow-y: auto;
+  white-space: pre-wrap;
 }
 
 .headerWrapper {
@@ -15,6 +16,7 @@
 }
 
 .titleWrapper h1 {
+  font-size: 2.3rem;
   margin-bottom: 0.5rem;
 }
 
@@ -25,7 +27,7 @@
 .tagsWrapper span {
   background-color: #777;
   color: #fff;
-  padding: 0.1rem;
+  padding: 0.2rem 0.3rem;
   font-size: 0.9rem;
 }
 
@@ -33,6 +35,44 @@
   margin-left: 0.5rem;
 }
 
+.dateWrapper p {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
 .contentWrapper {
   padding: 2rem 1.5rem;
+}
+
+.contentWrapper h1 {
+  font-size: 1.8rem;
+}
+
+.contentWrapper h2 {
+  font-size: 1.3rem;
+}
+
+.contentWrapper h3 {
+  font-size: 1rem;
+}
+
+.contentWrapper p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin: 1rem 0;
+}
+
+.contentWrapper blockquote {
+  border-left: 5px solid rgb(180, 180, 180);
+  color: #666;
+  font-family: 'Hoefler Text', 'Georgia', serif;
+  font-style: italic;
+  margin: 16px 0;
+  padding: 10px 20px;
+}
+
+.contentWrapper ul {
+  margin-left: 1rem;
 }
