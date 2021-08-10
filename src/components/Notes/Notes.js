@@ -35,16 +35,15 @@ const Notes = () => {
           tags: tagsArr,
           content: raw,
         };
-        console.log(contentObj);
         const httpObj = JSON.stringify(contentObj);
 
-        // await fetch('http://127.0.0.1:5000/api/v1/notes/', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: httpObj,
-        // });
+        await fetch('http://127.0.0.1:5000/api/v1/notes/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: httpObj,
+        });
       }
     }
   };

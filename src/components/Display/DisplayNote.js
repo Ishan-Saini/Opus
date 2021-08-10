@@ -1,183 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './DisplayNote.module.css';
 import redraft from 'redraft';
 import AtomicBlock from './DisplayUtil/AtomicBlock';
 import { FaTags, FaCalendarTimes } from 'react-icons/fa';
-
-const DUMMY_OBJ = {
-  title: 'Get started with programming',
-  tags: ['programming', 'js', 'golang'],
-  content: {
-    blocks: [
-      {
-        key: '8ofc8',
-        text: 'Render to React components sample',
-        type: 'header-one',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-        data: {},
-      },
-      {
-        key: 'f9oqb',
-        text: 'You can define custom components to render any part of the draf-js raw.',
-        type: 'unstyled',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [
-          {
-            offset: 59,
-            length: 7,
-            key: 0,
-          },
-        ],
-        data: {},
-      },
-      {
-        key: 'edq7t',
-        text: 'With cleanup and split flag enabled you can create new paragraphs with empty lines.',
-        type: 'unstyled',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-        data: {},
-      },
-      {
-        key: '964p1',
-        text: '',
-        type: 'unstyled',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-        data: {},
-      },
-      {
-        key: 'cd2or',
-        text: 'Like this.',
-        type: 'unstyled',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-        data: {},
-      },
-      {
-        key: '3ov91',
-        text: '',
-        type: 'atomic',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-        data: {
-          src: 'sample_cat.jpg',
-          type: 'image',
-          display: 'medium',
-          caption: 'Some cat tax',
-          rightsHolder: 'Inge Wallumrød, under CC0 License ',
-        },
-      },
-      {
-        key: '1pdul',
-        text: 'Lists are cool',
-        type: 'unordered-list-item',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-        data: {},
-      },
-      {
-        key: '224ne',
-        text: 'try to add or delete',
-        type: 'unordered-list-item',
-        depth: 0,
-        inlineStyleRanges: [
-          {
-            offset: 7,
-            length: 3,
-            style: 'BOLD',
-          },
-          {
-            offset: 14,
-            length: 6,
-            style: 'BOLD',
-          },
-          {
-            offset: 7,
-            length: 3,
-            style: 'ITALIC',
-          },
-          {
-            offset: 14,
-            length: 6,
-            style: 'ITALIC',
-          },
-        ],
-        entityRanges: [],
-        data: {},
-      },
-      {
-        key: 'dulcp',
-        text: 'some items',
-        type: 'unordered-list-item',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-        data: {},
-      },
-      {
-        key: 'f0nn7',
-        text: 'in this example',
-        type: 'unordered-list-item',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [],
-        data: {},
-      },
-      {
-        key: 'bg0j2',
-        text: 'Redraft api is simple and declarative, for more info check the readme or this example source ',
-        type: 'blockquote',
-        depth: 0,
-        inlineStyleRanges: [],
-        entityRanges: [
-          {
-            offset: 63,
-            length: 6,
-            key: 1,
-          },
-          {
-            offset: 86,
-            length: 6,
-            key: 2,
-          },
-        ],
-        data: {},
-      },
-    ],
-    entityMap: {
-      0: {
-        type: 'LINK',
-        mutability: 'MUTABLE',
-        data: {
-          url: 'https://github.com/facebook/draft-js',
-        },
-      },
-      1: {
-        type: 'LINK',
-        mutability: 'MUTABLE',
-        data: {
-          url: 'https://github.com/lokiuz/redraft/blob/master/README.md',
-        },
-      },
-      2: {
-        type: 'LINK',
-        mutability: 'MUTABLE',
-        data: {
-          url: 'https://github.com/lokiuz/redraft/tree/master/example/src',
-        },
-      },
-    },
-  },
-};
+import noteContext from '../../store/Note-context';
+import productiveMan from '../../images/productive-man.svg';
+import { BsPlusSquareFill } from 'react-icons/bs';
+import { IconContext } from 'react-icons';
 
 const styles = {
   code: {
@@ -259,7 +88,8 @@ const entities = {
   ),
 };
 
-// const isEmptyRaw = raw => !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
+const isEmptyRaw = (raw) =>
+  !raw || !raw.blocks || (raw.blocks.length === 1 && raw.blocks[0].text === '');
 
 const options = {
   cleanup: {
@@ -270,28 +100,67 @@ const options = {
 };
 
 const DisplayNote = () => {
-  const raw = DUMMY_OBJ.content;
-  const rendered = redraft(raw, { inline, blocks, entities }, options);
-  return (
-    <div className={classes.displayWrapper}>
-      <div className={classes.headerWrapper}>
-        <div className={classes.titleWrapper}>
-          <h1>{DUMMY_OBJ.title}</h1>
-        </div>
-        <div className={classes.tagsWrapper}>
-          <FaTags />
-          {DUMMY_OBJ.tags.map((tag) => {
-            return <span>{tag}</span>;
-          })}
-        </div>
-        <div className={classes.dateWrapper}>
-          <FaCalendarTimes />
-          <p>27th July 2021</p>
-        </div>
+  const noteCtx = useContext(noteContext);
+
+  let displayContent = (
+    <div className={classes['no-display__container']}>
+      <div className={classes['no-display-img__container']}>
+        <img src={productiveMan} alt="productive man" />
       </div>
-      <div className={classes.contentWrapper}>{rendered}</div>
+      <div className={classes['no-display-msg__container']}>
+        <p className={classes['no-display__msg']}>Start a new note</p>
+        <IconContext.Provider value={{ size: '1.7rem' }}>
+          <BsPlusSquareFill className={classes['no-display__btn']} />
+        </IconContext.Provider>
+      </div>
     </div>
   );
+
+  let rendered = '';
+
+  if (
+    !(
+      Object.keys(noteCtx.note).length === 0 &&
+      noteCtx.note.constructor === Object
+    )
+  ) {
+    const raw = noteCtx.note.content;
+    const isContentAvailable = isEmptyRaw(noteCtx.note.content);
+    let tagsContent = null;
+
+    if (isContentAvailable) {
+      rendered = redraft(raw, { inline, blocks, entities }, options);
+    }
+
+    if (noteCtx.note.tags) {
+      tagsContent = noteCtx.note.tags.map((tag) => {
+        return <span>{tag}</span>;
+      });
+    }
+
+    displayContent = (
+      <div className={classes.displayWrapper}>
+        <div className={classes.headerWrapper}>
+          <div className={classes.titleWrapper}>
+            <h1>{noteCtx.note.title}</h1>
+          </div>
+          {tagsContent && (
+            <div className={classes.tagsWrapper}>
+              <FaTags />
+              {tagsContent}
+            </div>
+          )}
+          <div className={classes.dateWrapper}>
+            <FaCalendarTimes />
+            <p>{noteCtx.note.date}</p>
+          </div>
+        </div>
+        <div className={classes.contentWrapper}>{rendered}</div>
+      </div>
+    );
+  }
+
+  return displayContent;
 };
 
 export default DisplayNote;
