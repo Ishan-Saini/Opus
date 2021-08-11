@@ -5,7 +5,7 @@ import Button from '../UI/Button';
 import NotesEditor from './NotesEditor';
 import { EditorState, convertToRaw } from 'draft-js';
 
-const Notes = () => {
+const Notes = (props) => {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const [editorState, setEditorState] = useState(() =>
@@ -48,6 +48,10 @@ const Notes = () => {
     }
   };
 
+  const editorDisplayHandler = () => {
+    props.isDisplayed(false);
+  };
+
   return (
     <form className={classes['notes-wrapper']} onSubmit={submitHandler}>
       <NotesHeader
@@ -60,9 +64,16 @@ const Notes = () => {
         edState={editorState}
         stateUpdate={editorStateUpdateHandler}
       />
-      <div className={classes['add-btn__wrapper']}>
+      <div className={classes['btn__wrapper']}>
         <Button type="submit" className={classes['btn-add']}>
           Add
+        </Button>
+        <Button
+          type="button"
+          className={classes['btn-cancel']}
+          onClick={editorDisplayHandler}
+        >
+          Cancel
         </Button>
       </div>
     </form>

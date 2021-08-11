@@ -99,8 +99,12 @@ const options = {
   },
 };
 
-const DisplayNote = () => {
+const DisplayNote = (props) => {
   const noteCtx = useContext(noteContext);
+
+  const editorDisplayHandler = () => {
+    props.isDisplayed(true);
+  };
 
   let displayContent = (
     <div className={classes['no-display__container']}>
@@ -110,7 +114,10 @@ const DisplayNote = () => {
       <div className={classes['no-display-msg__container']}>
         <p className={classes['no-display__msg']}>Start a new note</p>
         <IconContext.Provider value={{ size: '1.7rem' }}>
-          <BsPlusSquareFill className={classes['no-display__btn']} />
+          <BsPlusSquareFill
+            className={classes['no-display__btn']}
+            onClick={editorDisplayHandler}
+          />
         </IconContext.Provider>
       </div>
     </div>
