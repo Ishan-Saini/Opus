@@ -4,9 +4,6 @@ import redraft from 'redraft';
 import AtomicBlock from './DisplayUtil/AtomicBlock';
 import { FaTags, FaCalendarTimes } from 'react-icons/fa';
 import noteContext from '../../store/Note-context';
-import productiveMan from '../../images/productive-man.svg';
-import { BsPlusSquareFill } from 'react-icons/bs';
-import { IconContext } from 'react-icons';
 
 const styles = {
   code: {
@@ -102,26 +99,7 @@ const options = {
 const DisplayNote = (props) => {
   const noteCtx = useContext(noteContext);
 
-  const editorDisplayHandler = () => {
-    props.isDisplayed(true);
-  };
-
-  let displayContent = (
-    <div className={classes['no-display__container']}>
-      <div className={classes['no-display-img__container']}>
-        <img src={productiveMan} alt="productive man" />
-      </div>
-      <div className={classes['no-display-msg__container']}>
-        <p className={classes['no-display__msg']}>Start a new note</p>
-        <IconContext.Provider value={{ size: '1.7rem' }}>
-          <BsPlusSquareFill
-            className={classes['no-display__btn']}
-            onClick={editorDisplayHandler}
-          />
-        </IconContext.Provider>
-      </div>
-    </div>
-  );
+  let displayContent = '';
 
   let rendered = '';
 
