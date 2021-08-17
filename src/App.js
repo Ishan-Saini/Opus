@@ -1,20 +1,13 @@
-import { useState } from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
 import DisplayNote from './components/Display/DisplayNote';
 import Header from './components/Layout/Header/Header';
-import Welcome from './components/Layout/Main/Welcome';
+import Welcome from './Pages/Welcome';
 import Sidebar from './components/Layout/Sidebar/Sidebar';
 import Notes from './components/Notes/Notes';
 import NoteProvider from './store/NoteProvider';
 
 function App() {
-  const [showEditor, setShowEditor] = useState(false);
-
-  const editorDisplayHandler = (bool) => {
-    if (bool === true) setShowEditor(true);
-    else if (bool === false) setShowEditor(false);
-  };
-
   return (
     <NoteProvider>
       <div className="App">
@@ -25,9 +18,20 @@ function App() {
           <Sidebar />
         </aside>
         <main className="content">
-          {!showEditor && <Welcome isDisplayed={editorDisplayHandler} />}
-          {showEditor && <Notes isDisplayed={editorDisplayHandler} />}
-          {/* <DisplayNote isDisplayed={editorDisplayHandler} /> */}
+          <Switch>
+            <Route path="/" exact>
+              <Redirect to="/welcome" />
+            </Route>
+            <Route path="/welcome" exact>
+              <Welcome />
+            </Route>
+            <Route path="/editor" exact>
+              <Notes />
+            </Route>
+            <Route path="/notes/:noteId" exact>
+              <DisplayNote />
+            </Route>
+          </Switch>
         </main>
         <footer className="footer"></footer>
       </div>

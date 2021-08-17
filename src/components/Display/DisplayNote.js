@@ -99,7 +99,7 @@ const options = {
 const DisplayNote = (props) => {
   const noteCtx = useContext(noteContext);
 
-  let displayContent = '';
+  let displayContent = <p>No note to display</p>;
 
   let rendered = '';
 

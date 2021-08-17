@@ -1,19 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import classes from './NotesTiles.module.css';
 import { FaTrashAlt } from 'react-icons/fa';
+import { IoOpenOutline } from 'react-icons/io5';
 import noteContext from '../../../store/Note-context';
+
+const notesArr = [
+  {
+    id: '1',
+    title: 'Hello there',
+    tags: ['tags', 'ex'],
+  },
+];
 
 const NotesTiles = (props) => {
   const noteCtx = useContext(noteContext);
 
+  const history = useHistory();
+
   const noteOpenHandler = (e) => {
-    const id = e.currentTarget.dataset.noteId;
-    const currentNoteArr = props.notesArr.filter((note) => note.id === id);
-    noteCtx.addCurrentNote(currentNoteArr[0]);
+    const id = e.currentTarget.parentNode.dataset.noteid;
+    // const currentNote = props.notesArr.find((note) => note.id === id);
+    // noteCtx.addCurrentNote(currentNote);
+    history.push(`/notes/${id}`);
   };
 
   const removeNoteHandler = (e) => {
-    const id = e.currentTarget.parentNode.dataset.noteId;
+    const id = e.currenTarget.parentNode.dataset.noteid;
     fetch(`http://127.0.0.1:5000/api/v1/notes/${id}`, {
       method: 'DELETE',
     });
@@ -24,16 +37,15 @@ const NotesTiles = (props) => {
     <p className={classes['Empty-Sidebar-Msg']}>No notes Available</p>
   );
 
-  if (props.notesArr.length !== 0) {
+  if (notesArr.length !== 0) {
     notesTileContent = (
       <ul className={classes['notes-tile-wrapper']}>
-        {props.notesArr.map((tile) => {
+        {notesArr.map((tile) => {
           return (
             <li
               className={classes['notes-tile']}
               key={tile.id}
-              onClick={noteOpenHandler}
-              data-noteId={tile.id}
+              data-noteid={tile.id}
             >
               <div className={classes.titleWrapper}>
                 <p className={classes['notes-tile__title']}>{tile.title}</p>
@@ -45,8 +57,14 @@ const NotesTiles = (props) => {
                   </span>
                 ))}
               </div>
-              <div className={classes.btnWrapper} onClick={removeNoteHandler}>
-                <FaTrashAlt className={classes['trash-btn']} />
+              <div className={classes.openBtnWrapper} onClick={noteOpenHandler}>
+                <IoOpenOutline className={classes['tile-btn']} />
+              </div>
+              <div
+                className={classes.trashBtnWrapper}
+                onClick={removeNoteHandler}
+              >
+                <FaTrashAlt className={classes['tile-btn']} />
               </div>
             </li>
           );

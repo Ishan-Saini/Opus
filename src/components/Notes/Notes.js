@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import classes from './Notes.module.css';
 import NotesHeader from './NotesHeader';
 import Button from '../UI/Button';
@@ -48,8 +49,10 @@ const Notes = (props) => {
     }
   };
 
-  const editorDisplayHandler = () => {
-    props.isDisplayed(false);
+  const history = useHistory();
+
+  const cancelBtnHandler = () => {
+    history.replace('/welcome');
   };
 
   return (
@@ -71,7 +74,7 @@ const Notes = (props) => {
         <Button
           type="button"
           className={classes['btn-cancel']}
-          onClick={editorDisplayHandler}
+          onClick={cancelBtnHandler}
         >
           Cancel
         </Button>

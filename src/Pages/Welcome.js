@@ -1,12 +1,15 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import classes from './Welcome.module.css';
-import productiveMan from '../../../images/productive-man.svg';
+import productiveMan from '../images/productive-man.svg';
 import { BsPlusSquareFill } from 'react-icons/bs';
 import { IconContext } from 'react-icons';
 
 const Welcome = (props) => {
-  const editorDisplayHandler = () => {
-    props.isDisplayed(true);
+  const history = useHistory();
+
+  const newNoteBtnHandler = () => {
+    history.push('/editor');
   };
 
   let displayContent = (
@@ -19,7 +22,7 @@ const Welcome = (props) => {
         <IconContext.Provider value={{ size: '1.7rem' }}>
           <BsPlusSquareFill
             className={classes['no-display__btn']}
-            onClick={editorDisplayHandler}
+            onClick={newNoteBtnHandler}
           />
         </IconContext.Provider>
       </div>
