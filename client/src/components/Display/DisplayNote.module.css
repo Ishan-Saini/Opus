@@ -1,0 +1,80 @@
+.displayWrapper {
+  width: 100%;
+  max-width: 90%;
+  height: 100%;
+  max-height: 90%;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 10px 20px -9px rgba(0, 0, 0, 0.5);
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+.headerWrapper {
+  background-color: rgb(185, 185, 185);
+  padding: 1rem 1rem;
+}
+
+.titleWrapper h1 {
+  font-size: 2.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagsWrapper {
+  margin-bottom: 0.8rem;
+}
+
+.tagsWrapper span {
+  background-color: #777;
+  color: #fff;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.9rem;
+}
+
+.tagsWrapper span:not(:first-child) {
+  margin-left: 0.5rem;
+}
+
+.dateWrapper p {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+.contentWrapper {
+  padding: 2rem 1.5rem;
+}
+
+.contentWrapper h1 {
+  font-size: 1.8rem;
+}
+
+.contentWrapper h2 {
+  font-size: 1.3rem;
+}
+
+.contentWrapper h3 {
+  font-size: 1rem;
+}
+
+.contentWrapper p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin: 1rem 0;
+}
+
+.contentWrapper blockquote {
+  border-left: 5px solid rgb(180, 180, 180);
+  color: rgb(92, 91, 91);
+  font-family: 'Hoefler Text', 'Georgia', serif;
+  font-style: italic;
+  margin: 16px 0;
+  padding: 5px 15px;
+  background-color: rgba(206, 206, 206, 0.233);
+  display: inline-block;
+}
+
+.contentWrapper ul {
+  margin-left: 1rem;
+}

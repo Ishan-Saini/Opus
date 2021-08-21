@@ -1,0 +1,21 @@
+.sidebar-wrapper {
+  width: 82%;
+  max-width: 82%;
+}
+
+.loader_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sidebar-notes__container {
+  width: 100%;
+  min-height: 70vh;
+  background-color: #cecece;
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+  overflow: auto;
+  position: relative;
+}
