@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
+import WelcomePage from './Pages/Welcome/WelcomePage';
 import DisplayNote from './components/Display/DisplayNote';
 import Header from './components/Layout/Header/Header';
-import Welcome from './Pages/Welcome';
+import NotesPage from './Pages/Notes/NotesPage';
 import Sidebar from './components/Layout/Sidebar/Sidebar';
 import Editor from './components/Notes/Editor';
 
 function App() {
   const [refresh, setRefresh] = useState(false);
+  const [showSidebar] = useState(
+    window.location.pathname === '/welcome' ? false : true
+  );
 
   const refreshToggler = (bool) => {
     setRefresh((bool) => !bool);
@@ -19,16 +23,21 @@ function App() {
       <header className="header">
         <Header />
       </header>
-      <aside className="sidebar">
-        <Sidebar refresh={refresh} />
-      </aside>
-      <main className="content">
-        <Switch>
+      {showSidebar && (
+        <aside className="sidebar">
+          <Sidebar refresh={refresh} />
+        </aside>
+      )}
+      <Switch>
+        <Route path="/welcome" exact>
+          <WelcomePage />
+        </Route>
+        <main className="content">
           <Route path="/" exact>
             <Redirect to="/notes" />
           </Route>
           <Route path="/notes" exact>
-            <Welcome />
+            <NotesPage />
           </Route>
           <Route path="/notes/:noteId">
             <DisplayNote />
@@ -39,8 +48,8 @@ function App() {
           <Route path="/editor/:noteId">
             <Editor />
           </Route>
-        </Switch>
-      </main>
+        </main>
+      </Switch>
       <footer className="footer"></footer>
     </div>
   );

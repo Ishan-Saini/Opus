@@ -7,7 +7,13 @@
   margin: 0;
 }
 
+html,
+#root {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   margin: 0;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;

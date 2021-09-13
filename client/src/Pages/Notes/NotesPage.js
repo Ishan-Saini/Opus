@@ -1,11 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import classes from './Welcome.module.css';
-import productiveMan from '../images/productive-man.svg';
+import classes from './NotesPage.module.css';
+import productiveMan from '../../images/productive-man.svg';
 import { BsPlusSquareFill } from 'react-icons/bs';
 import { IconContext } from 'react-icons';
 
-const Welcome = (props) => {
+const NotesPage = (props) => {
   const history = useHistory();
 
   const newNoteBtnHandler = () => {
@@ -18,7 +18,7 @@ const Welcome = (props) => {
         <img src={productiveMan} alt="productive man" />
       </div>
       <div className={classes['no-display-msg__container']}>
-        <p className={classes['no-display__msg']}>Start a new note</p>
+        <p className={classes['no-display__msg']}>Start writing</p>
         <IconContext.Provider value={{ size: '1.7rem' }}>
           <BsPlusSquareFill
             className={classes['no-display__btn']}
@@ -32,4 +32,4 @@ const Welcome = (props) => {
   return displayContent;
 };
 
-export default Welcome;
+export default NotesPage;

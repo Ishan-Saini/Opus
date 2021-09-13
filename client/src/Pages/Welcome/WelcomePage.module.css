@@ -1,0 +1,8 @@
+.landing-svg__container {
+  width: 50%;
+  margin: auto;
+}
+
+.landing-svg__container img {
+  max-width: 100%;
+}
