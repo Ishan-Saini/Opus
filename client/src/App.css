@@ -24,7 +24,6 @@
 
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 3.3rem 1fr 2rem;
-  gap: 1rem;
 }
 
 .header {
