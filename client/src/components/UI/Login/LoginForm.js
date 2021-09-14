@@ -7,24 +7,27 @@ const LoginForm = () => {
     <form className={classes.loginForm}>
       <h1>Welcome back!</h1>
       <label for="emailid" className={classes.label}>
-        Email-Id
+        EMAIL
       </label>
       <input
         type="email"
-        className={`classes.emailInput + ${classes.inputBox}`}
+        className={`${classes.emailInput} + ${classes.inputBox}`}
         name="emailid"
       />
       <label for="password" className={classes.label}>
-        Password
+        PASSWORD
       </label>
       <input
         type="password"
-        className={`classes.passwordInput + ${classes.inputBox}`}
+        className={`${classes.passwordInput} + ${classes.inputBox}`}
         name="password"
       />
+
       <Link className={classes['reset-link']}>Forgot Password?</Link>
-      <input type="submit" className={classes.submitBtn} />
-      <p className={classes['signup-link']}>Need an account? Signup</p>
+      <button type="submit" className={classes.submitBtn}>
+        LOGIN
+      </button>
+      <Link className={classes['signup-link']}>Need an account? Signup</Link>
     </form>
   );
 };

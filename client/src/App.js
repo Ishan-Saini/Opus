@@ -11,7 +11,10 @@ import Editor from './components/Notes/Editor';
 function App() {
   const [refresh, setRefresh] = useState(false);
   const [showSidebar] = useState(
-    window.location.pathname === '/welcome' ? false : true
+    window.location.pathname === '/login' ||
+      window.location.pathname === '/signup'
+      ? false
+      : true
   );
 
   const refreshToggler = (bool) => {
@@ -29,7 +32,7 @@ function App() {
         </aside>
       )}
       <Switch>
-        <Route path="/welcome" exact>
+        <Route path={['/login', '/signup']} exact>
           <WelcomePage />
         </Route>
         <main className="content">
