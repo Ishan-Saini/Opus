@@ -1,7 +1,9 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import classes from './WelcomePage.module.css';
 import landingSvg from '../../images/landingSvg.svg';
-import LoginForm from '../../components/UI/Login/LoginForm';
+import LoginForm from '../../components/UI/AuthForm/LoginForm';
+import SignupForm from '../../components/UI/AuthForm/SingupForm';
 
 const WelcomePage = () => {
   return (
@@ -15,7 +17,14 @@ const WelcomePage = () => {
           <p>Keep all your notes organised</p>
         </div>
         <div className={classes['landing-form__container']}>
-          <LoginForm />
+          <Switch>
+            <Route path="/login" exact>
+              <LoginForm />
+            </Route>
+            <Route path="/signup" exact>
+              <SignupForm />
+            </Route>
+          </Switch>
         </div>
       </div>
     </React.Fragment>

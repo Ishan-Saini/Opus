@@ -22,16 +22,16 @@
   font-family: inherit;
 }
 
+.inputBox:not(:last-of-type) {
+  margin-bottom: 1.2rem;
+}
+
 .inputBox:hover {
   border-color: #616161;
 }
 
 .inputBox:focus {
   border-color: #000;
-}
-
-.emailInput {
-  margin-bottom: 1.5rem;
 }
 
 .label {
@@ -50,7 +50,7 @@
   color: #000;
 }
 
-.signup-link {
+.switch-link {
   margin: 0.5rem 0;
   font-size: 0.9rem;
   cursor: pointer;
@@ -58,7 +58,7 @@
   text-decoration: none;
 }
 
-.signup-link:hover {
+.switch-link:hover {
   color: #000;
 }
 

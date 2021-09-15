@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import classes from './LoginForm.module.css';
+import classes from './AuthForm.module.css';
 
 const LoginForm = () => {
   return (
@@ -27,7 +27,9 @@ const LoginForm = () => {
       <button type="submit" className={classes.submitBtn}>
         LOGIN
       </button>
-      <Link className={classes['signup-link']}>Need an account? Signup</Link>
+      <Link to="/signup" className={classes['switch-link']}>
+        Need an account? Signup
+      </Link>
     </form>
   );
 };
