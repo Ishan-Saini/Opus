@@ -13,6 +13,7 @@ const SignupForm = () => {
         type="text"
         className={`${classes.nameInput} + ${classes.inputBox}`}
         name="name"
+        spellCheck="false"
       />
       <label for="emailid" className={classes.label}>
         EMAIL
@@ -21,6 +22,7 @@ const SignupForm = () => {
         type="email"
         className={`${classes.emailInput} + ${classes.inputBox}`}
         name="emailid"
+        spellCheck="false"
       />
       <label for="password" className={classes.label}>
         PASSWORD

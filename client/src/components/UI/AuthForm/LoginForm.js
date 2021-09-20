@@ -13,6 +13,7 @@ const LoginForm = () => {
         type="email"
         className={`${classes.emailInput} + ${classes.inputBox}`}
         name="emailid"
+        spellCheck="false"
       />
       <label for="password" className={classes.label}>
         PASSWORD

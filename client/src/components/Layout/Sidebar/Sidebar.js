@@ -3,6 +3,8 @@ import classes from './Sidebar.module.css';
 import Search from './Search/SearchInput';
 import NotesTiles from './NotesTiles';
 import Loading from '../../UI/Loading';
+import { BsPlusSquareFill } from 'react-icons/bs';
+import { IconContext } from 'react-icons';
 
 const Sidebar = (props) => {
   const [notesList, setNotesList] = useState([]);
@@ -41,18 +43,26 @@ const Sidebar = (props) => {
 
   return (
     <div className={classes['sidebar-wrapper']}>
-      <Search />
+      <div className={classes['sidebar-notebooks__container']}>
+        <div className={classes['notebooks-header__container']}>
+          <p>NOTEBOOKS</p>
+          <IconContext.Provider value={{ size: '1.2rem' }}>
+            <BsPlusSquareFill className={classes['notebooks-header__btn']} />
+          </IconContext.Provider>
+        </div>
+      </div>
       <div className={classes['sidebar-notes__container']}>
-        {isLoading && (
+        {/* {isLoading && (
           <div className={classes['loader_wrapper']}>
             <Loading loading={isLoading} size={25} />
           </div>
-        )}
-        <NotesTiles
+        )} */}
+        <Search />
+        {/* <NotesTiles
           isLoading={isLoading}
           notesArr={notesList}
           refresh={refreshToggler}
-        />
+        /> */}
       </div>
     </div>
   );
