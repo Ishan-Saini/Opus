@@ -1,9 +1,9 @@
-const Note = require('../models/noteModel');
+const Notebook = require('../models/notebookModel');
 const asyncUtility = require('../util/AsyncUtility');
-const ErrorClass = require('../util/ErrorUtilityClass');
+const ErrorUtility = require('../util/ErrorUtilityClass');
 
 exports.getAllNotes = asyncUtility(async (req, res, next) => {
-  const noteData = await Note.find();
+  const noteData = await Notebook.find().populate('user');
   res.status(200).json({
     status: 'success',
     data: noteData,
@@ -11,10 +11,10 @@ exports.getAllNotes = asyncUtility(async (req, res, next) => {
 });
 
 exports.getNote = asyncUtility(async (req, res, next) => {
-  const noteData = await Note.findById(req.params.id);
+  const noteData = await Notebook.findById(req.params.id);
 
   if (!noteData) {
-    next(new ErrorClass('No note with that id was found', 404));
+    next(new ErrorUtility('No note with that id was found', 404));
   }
 
   res.status(200).json({
@@ -24,10 +24,10 @@ exports.getNote = asyncUtility(async (req, res, next) => {
 });
 
 exports.createNote = asyncUtility(async (req, res, next) => {
-  const noteInstance = new Note({
-    content: req.body.content,
+  const noteInstance = new Notebook({
+    user: req.body.user,
     title: req.body.title,
-    tags: req.body.tags,
+    notes: req.body.notes,
   });
 
   const newNote = await noteInstance.save();
@@ -38,13 +38,13 @@ exports.createNote = asyncUtility(async (req, res, next) => {
 });
 
 exports.updateNote = asyncUtility(async (req, res, next) => {
-  const noteData = await Note.findByIdAndUpdate(req.params.id, req.body, {
+  const noteData = await Notebook.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
 
   if (!noteData) {
-    next(new ErrorClass('No note with that id was found', 404));
+    next(new ErrorUtility('No note with that id was found', 404));
   }
 
   res.status(200).json({
@@ -54,10 +54,10 @@ exports.updateNote = asyncUtility(async (req, res, next) => {
 });
 
 exports.deleteNote = asyncUtility(async (req, res, next) => {
-  const noteData = await Note.findByIdAndDelete(req.params.id);
+  const noteData = await Notebook.findByIdAndDelete(req.params.id);
 
   if (!noteData) {
-    next(new ErrorClass('No note with that id was found', 404));
+    next(new ErrorUtility('No note with that id was found', 404));
   }
 
   res.status(204).json({

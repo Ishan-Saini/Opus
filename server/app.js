@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const noteRouter = require('./routes/noteRoutes');
+const notebookRouter = require('./routes/notebookRoutes');
+const userRouter = require('./routes/userRoutes');
 const errorController = require('./controllers/errorController');
-const ErrorUtilityClass = require('./util/ErrorUtilityClass');
+const ErrorUtility = require('./util/ErrorUtilityClass');
+const authController = require('./controllers/authController');
 
 const app = express();
 
@@ -10,14 +12,12 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use('/api/v1/notes', noteRouter);
+app.use('/api/v1/notes', authController.protect, notebookRouter);
+app.use('/api/v1/users', userRouter);
 
 app.all('*', (req, res, next) => {
   next(
-    new ErrorUtilityClass(
-      `${req.originalUrl} is not available on this server`,
-      404
-    )
+    new ErrorUtility(`${req.originalUrl} is not available on this server`, 404)
   );
 });
 

@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/Ishan-Saini/Opus#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.2",
     "validator": "^13.6.0"
   },

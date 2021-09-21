@@ -1,3 +1,11 @@
+const ErrorUtility = require('../util/ErrorUtilityClass');
+
+const jwtErrorHandler = () =>
+  new ErrorUtility('Invalid Token. Please log in again!', 401);
+
+const jwtExpiryErrorHandler = () =>
+  new ErrorUtility('Token has expired. Please log in again!', 401);
+
 const developmentError = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -29,6 +37,12 @@ module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     developmentError(err, res);
   } else if (process.env.NODE_ENV === 'production') {
-    productionError(err, res);
+    let error;
+    // eslint-disable-next-line node/no-unsupported-features/es-syntax
+    error = { ...err };
+    if (error.name === 'JsonWebTokenError') error = jwtErrorHandler();
+    if (error.name === 'TokenExpiredError') error = jwtExpiryErrorHandler();
+
+    productionError(error, res);
   }
 };
