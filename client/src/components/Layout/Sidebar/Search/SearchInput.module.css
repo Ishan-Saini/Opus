@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
 
 .search-container {
-  padding: 0.4rem 0.5rem 0.4rem 0.5rem;
+  position: sticky;
+  top: 0;
+  padding: 0.4rem 0.5rem 0.325rem 0.5rem;
   width: 100%;
   display: flex;
   flex-direction: row;
-  border-bottom: 2px solid #000;
+  justify-content: center;
+  border-bottom: 1px solid #000;
+  margin-bottom: 0.5rem;
 }
 
 .search-input__container {
@@ -23,7 +27,7 @@
 }
 
 .search-btn__container {
-  width: 13%;
+  width: 10%;
 }
 
 .search-btn__container button {

@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 /* Track */
@@ -23,10 +23,11 @@
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 3.3rem 1fr 2rem;
+  grid-template-rows: 6vh 90vh 4vh;
 }
 
 .header {
+  grid-row: 1 / span 1;
   grid-column: 1 / span 3;
 }
 

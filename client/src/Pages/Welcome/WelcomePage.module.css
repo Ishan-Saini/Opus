@@ -36,7 +36,7 @@
 }
 
 .landing-form__container {
-  background-color: #cacaca;
+  background-color: #d6d6d6;
   grid-row: 1 / span 3;
   grid-column: 4 / span 2;
   display: flex;

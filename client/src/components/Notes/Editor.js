@@ -31,6 +31,7 @@ const Editor = (props) => {
     const tagsArr = tags.replace(/ /g, '').split(',');
     if (title !== '') {
       if (tagsArr.length <= 3) {
+        // UX
         const contentObj = {
           title,
           tags: tagsArr,
@@ -38,7 +39,7 @@ const Editor = (props) => {
         };
         const httpObj = JSON.stringify(contentObj);
 
-        await fetch('http://127.0.0.1:5000/api/v1/notes/', {
+        await fetch('http://127.0.0.1:5000/api/v1/notebooks/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

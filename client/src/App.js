@@ -37,12 +37,12 @@ function App() {
         </Route>
         <main className="content">
           <Route path="/" exact>
-            <Redirect to="/notes" />
+            <Redirect to="/notebooks" />
           </Route>
-          <Route path="/notes" exact>
+          <Route path={['/notebooks', '/notebooks/:nbId/notes/']} exact>
             <NotesPage />
           </Route>
-          <Route path="/notes/:noteId">
+          <Route path="/notebooks/:nbId/notes/:noteId">
             <DisplayNote />
           </Route>
           <Route path="/editor" exact>

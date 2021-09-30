@@ -23,14 +23,14 @@ const DisplayNote = (props) => {
   const [note, setNote] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const { noteId } = params;
+  const { noteId, nbId } = params;
 
   useEffect(() => {
     const fetchNote = async () => {
       try {
         setIsLoading(true);
         const noteJson = await fetch(
-          `http://127.0.0.1:5000/api/v1/notes/${noteId}`
+          `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/${noteId}`
         );
         const noteObj = await noteJson.json();
         setIsLoading(false);
@@ -40,7 +40,7 @@ const DisplayNote = (props) => {
       }
     };
     fetchNote();
-  }, [noteId]);
+  }, [noteId, nbId]);
 
   let displayContent = null;
 

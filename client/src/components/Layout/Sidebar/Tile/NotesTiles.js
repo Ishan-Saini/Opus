@@ -1,38 +1,76 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import classes from './NotesTiles.module.css';
 import { FaTrashAlt } from 'react-icons/fa';
 import { IoOpenOutline } from 'react-icons/io5';
+import Loading from '../../../UI/Loading';
 
 const NotesTiles = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [notesArr, setNotesArr] = useState([]);
   const history = useHistory();
+  const params = useParams();
+  const { nbId } = params;
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`
+        );
+        const jsonResponse = await response.json();
+        const notesData = jsonResponse.data;
+        const notesList = [];
+        for (const key in notesData) {
+          notesList.push({
+            id: notesData[key]._id,
+            title: notesData[key].title,
+            tags: notesData[key].tags,
+          });
+        }
+        setIsLoading(false);
+        setNotesArr(notesList);
+      } catch (err) {
+        console.warn(err);
+      }
+    };
+    fetchNotes();
+  }, [nbId]);
 
   const noteOpenHandler = (e) => {
     const id = e.currentTarget.parentNode.dataset.noteid;
-    history.push(`/notes/${id}`);
+    history.push(`/notesbook/${nbId}/notes/${id}`);
   };
 
   const removeNoteHandler = async (e) => {
     const id = e.currentTarget.parentNode.dataset.noteid;
-    await fetch(`http://127.0.0.1:5000/api/v1/notes/${id}`, {
+    await fetch(`http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/${id}`, {
       method: 'DELETE',
     });
-    props.refresh(true);
-    history.push('/notes');
+    history.push(`/notesbook/${nbId}/notes/`);
   };
 
   let notesTileContent = null;
 
-  if (!props.isLoading) {
+  if (isLoading) {
     notesTileContent = (
-      <p className={classes['Empty-Sidebar-Msg']}>No notes Available</p>
+      <div className={classes['loader_wrapper']}>
+        <Loading loading={isLoading} size={25} />
+      </div>
     );
   }
 
-  if (props.notesArr.length !== 0) {
+  if (!isLoading) {
+    notesTileContent = (
+      <p className={classes['Empty-Sidebar-Msg']}>Nothing in here!</p>
+    );
+  }
+
+  if (notesArr.length !== 0) {
     notesTileContent = (
       <ul className={classes['notes-tile-wrapper']}>
-        {props.notesArr.map((tile) => {
+        {notesArr.map((tile) => {
           return (
             <li
               className={classes['notes-tile']}
