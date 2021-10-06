@@ -1,17 +1,19 @@
 const express = require('express');
 const notebookController = require('../controllers/notebookController');
+const noteRouter = require('./noteRoutes');
 
 const router = express.Router();
 
+router.use('/:notebookId/notes', noteRouter);
+
 router
   .route('/')
-  .get(notebookController.getAllNotes)
-  .post(notebookController.createNote);
+  .get(notebookController.getAllNotebooks)
+  .post(notebookController.createNotebook);
 
 router
   .route('/:id')
-  .get(notebookController.getNote)
-  .patch(notebookController.updateNote)
-  .delete(notebookController.deleteNote);
+  .patch(notebookController.updateNotebook)
+  .delete(notebookController.deleteNotebook);
 
 module.exports = router;

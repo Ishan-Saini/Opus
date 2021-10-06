@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const asyncUtility = require('../util/AsyncUtility');
 const ErrorUtility = require('../util/ErrorUtilityClass');
+const sendEmail = require('../util/SendEmail');
 
 exports.signup = asyncUtility(async (req, res, next) => {
   const newUser = await User.create({
@@ -84,5 +85,47 @@ exports.protect = asyncUtility(async (req, res, next) => {
   }
 
   req.user = loggedInUser;
+  next();
+});
+
+exports.forgotPassword = asyncUtility(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) return next(new ErrorUtility('User not found.', 404));
+
+  const resetToken = user.createResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  const resetUrl = `${req.protocol}://${req.get(
+    'host'
+  )}/api/v1/users/resetPassword/${resetToken}`;
+
+  const message = `Did you request to reset your password? You can do this by clicking on the link : ${resetUrl} (valid for 10 minutes). If this wasn't you then please ignore this email.`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: 'OPUS | Reset password',
+      message,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Token sent to email',
+    });
+    // eslint-disable-next-line node/no-unsupported-features/es-syntax
+  } catch {
+    user.passwordResetToken = undefined;
+    user.resetTokenExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new ErrorUtility(
+        'Something went wrong while sending the email. Try again later!',
+        500
+      )
+    );
+  }
+
   next();
 });

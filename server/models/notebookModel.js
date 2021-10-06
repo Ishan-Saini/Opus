@@ -4,6 +4,7 @@ const notebookSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
+    required: [true, 'A notebook must belong to a user'],
   },
   title: {
     type: String,
@@ -11,19 +12,8 @@ const notebookSchema = new mongoose.Schema({
   },
   notes: [
     {
-      content: {
-        type: Object,
-        required: [true, 'Content object is required'],
-      },
-      title: {
-        type: String,
-        required: [true, "Note's title is required"],
-      },
-      tags: [String],
-      created: {
-        type: Date,
-        default: new Date(),
-      },
+      type: mongoose.Schema.ObjectId,
+      ref: 'Note',
     },
   ],
 });
