@@ -11,6 +11,19 @@ const generateToken = (user, statusCode, res) => {
     expiresIn: process.env.JWT_EXPIRY,
   });
 
+  const cookieConfig = {
+    expires: new Date(
+      Date.now() + process.env.JWT_EXPIRY_COOKIE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === 'production') cookieConfig.secure = true;
+
+  res.cookie('jwt', token, cookieConfig);
+
+  user.password = undefined;
+
   res.status(statusCode).json({
     status: 'success',
     token,
