@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import classes from './NotesTiles.module.css';
 import { FaTrashAlt } from 'react-icons/fa';
 import { IoOpenOutline } from 'react-icons/io5';
@@ -9,18 +10,24 @@ const NotesTiles = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [notesArr, setNotesArr] = useState([]);
   const history = useHistory();
-  const params = useParams();
-  const { nbId } = params;
+  let nbId;
+  const match = useRouteMatch({
+    path: '/notebooks/:nbId',
+  });
+
+  nbId = match ? match.params.nbId : null;
 
   useEffect(() => {
     const fetchNotes = async () => {
+      if (!nbId) return;
       try {
         setIsLoading(true);
-        const response = await fetch(
-          `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`
-        );
-        const jsonResponse = await response.json();
-        const notesData = jsonResponse.data;
+        const res = await axios({
+          method: 'GET',
+          url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`,
+          withCredentials: true,
+        });
+        const notesData = res.data.data;
         const notesList = [];
         for (const key in notesData) {
           notesList.push({
@@ -45,9 +52,13 @@ const NotesTiles = (props) => {
 
   const removeNoteHandler = async (e) => {
     const id = e.currentTarget.parentNode.dataset.noteid;
-    await fetch(`http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/${id}`, {
+
+    await axios({
       method: 'DELETE',
+      url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/${id}`,
+      withCredentials: true,
     });
+
     history.push(`/notesbook/${nbId}/notes/`);
   };
 

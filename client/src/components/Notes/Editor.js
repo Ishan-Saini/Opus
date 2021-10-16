@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { useHistory, useParams } from 'react-router-dom';
 import classes from './Notes.module.css';
 import NotesHeader from './NotesHeader';
 import Button from '../UI/Button';
@@ -12,6 +13,7 @@ const Editor = (props) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+  const { nbId } = useParams();
 
   const titleChangeHandler = (titleString) => {
     setTitle(titleString);
@@ -29,6 +31,7 @@ const Editor = (props) => {
     e.preventDefault();
     const raw = convertToRaw(editorState.getCurrentContent());
     const tagsArr = tags.replace(/ /g, '').split(',');
+    let noteId = null;
     if (title !== '') {
       if (tagsArr.length <= 3) {
         // UX
@@ -36,26 +39,29 @@ const Editor = (props) => {
           title,
           tags: tagsArr,
           content: raw,
+          notebook: nbId,
         };
-        const httpObj = JSON.stringify(contentObj);
-
-        await fetch('http://127.0.0.1:5000/api/v1/notebooks/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: httpObj,
-        });
+        try {
+          const res = await axios({
+            method: 'POST',
+            url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`,
+            withCredentials: true,
+            data: contentObj,
+          });
+          noteId = res.data.data._id;
+        } catch (err) {
+          console.log(err);
+        }
       }
       props.refresh(true);
     }
-    history.push('/notes');
+    //history.push(`/notebooks/${nbId}/notes/${noteId}`);
   };
 
   const history = useHistory();
 
   const cancelBtnHandler = () => {
-    history.replace('/notes');
+    history.replace('/notebooks');
   };
 
   return (

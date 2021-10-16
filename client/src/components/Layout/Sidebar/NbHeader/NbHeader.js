@@ -5,7 +5,7 @@ import { FaCheck, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 
 const NbHeader = () => {
-  const [isEntering, setIsEntering] = useState(true);
+  const [isEntering, setIsEntering] = useState(false);
   const [titleInput, setTitleInput] = useState('');
 
   const closeInputHandler = () => {
@@ -35,6 +35,8 @@ const NbHeader = () => {
       },
       body: notebook,
     });
+
+    setIsEntering(false);
   };
 
   return (

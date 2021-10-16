@@ -1,11 +1,9 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import classes from './WelcomePage.module.css';
 import landingSvg from '../../images/landingSvg.svg';
-import LoginForm from '../../components/UI/AuthForm/LoginForm';
-import SignupForm from '../../components/UI/AuthForm/SingupForm';
+import AuthForm from '../../components/UI/AuthForm/AuthForm';
 
-const WelcomePage = () => {
+const WelcomePage = (props) => {
   return (
     <React.Fragment>
       <div className={`landing + ${classes.landingPage}`}>
@@ -17,14 +15,7 @@ const WelcomePage = () => {
           <p>Keep all your notes organised</p>
         </div>
         <div className={classes['landing-form__container']}>
-          <Switch>
-            <Route path="/login" exact>
-              <LoginForm />
-            </Route>
-            <Route path="/signup" exact>
-              <SignupForm />
-            </Route>
-          </Switch>
+          <AuthForm />
         </div>
       </div>
     </React.Fragment>

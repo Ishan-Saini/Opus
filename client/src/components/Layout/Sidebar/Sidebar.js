@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import classes from './Sidebar.module.css';
 import Search from './Search/SearchInput';
 import NotesTiles from './Tile/NotesTiles';
@@ -15,9 +16,13 @@ const Sidebar = (props) => {
     const fetchNotebooks = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('http://127.0.0.1:5000/api/v1/notebooks/');
-        const jsonResponse = await response.json();
-        const nbObjData = jsonResponse.data;
+
+        const res = await axios({
+          method: 'GET',
+          url: 'http://127.0.0.1:5000/api/v1/notebooks/',
+          withCredentials: true,
+        });
+        const nbObjData = res.data.data;
         const notebooksArr = [];
         for (const key in nbObjData) {
           notebooksArr.push({
@@ -28,7 +33,7 @@ const Sidebar = (props) => {
         setIsLoading(false);
         setNotebooksList(notebooksArr);
       } catch (err) {
-        console.warn(err);
+        console.log(err);
       }
     };
     fetchNotebooks();

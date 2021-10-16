@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import classes from './NotesPage.module.css';
 import productiveMan from '../../images/productive-man.svg';
 import { BsPlusSquareFill } from 'react-icons/bs';
@@ -7,9 +7,10 @@ import { IconContext } from 'react-icons';
 
 const NotesPage = (props) => {
   const history = useHistory();
+  const { nbId } = useParams();
 
   const newNoteBtnHandler = () => {
-    history.push('/editor');
+    history.push(`/notebooks/${nbId}/editor`);
   };
 
   let displayContent = (

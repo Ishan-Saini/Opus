@@ -5,7 +5,7 @@ const NotebookTile = (props) => {
   const history = useHistory();
 
   const notebookClickHandler = (e) => {
-    const id = e.currentTarget.parentNode.dataset.nbid;
+    const id = e.currentTarget.dataset.nbid;
     history.push(`/notebooks/${id}/notes/`);
   };
 
