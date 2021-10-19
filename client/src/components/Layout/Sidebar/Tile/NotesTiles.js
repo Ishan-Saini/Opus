@@ -47,7 +47,7 @@ const NotesTiles = (props) => {
 
   const noteOpenHandler = (e) => {
     const id = e.currentTarget.parentNode.dataset.noteid;
-    history.push(`/notesbook/${nbId}/notes/${id}`);
+    history.push(`/notebooks/${nbId}/notes/${id}`);
   };
 
   const removeNoteHandler = async (e) => {

@@ -7,6 +7,7 @@ import Header from './components/Layout/Header/Header';
 import NotesPage from './Pages/Notes/NotesPage';
 import Sidebar from './components/Layout/Sidebar/Sidebar';
 import Editor from './components/Notes/Editor';
+import ErrorPage from './Pages/Error/ErrorPage';
 
 const notebookRoutes = {
   nb: ['/notebooks', '/notebooks/:nbId', '/notebooks/:nbId/notes'],
@@ -32,41 +33,46 @@ function App() {
         <Header />
       </header>
 
-      <Route path="/" exact>
-        <Redirect to="/notebooks" />
-      </Route>
+      <Switch>
+        <Route path="/" exact>
+          <Redirect to="/notebooks" />
+        </Route>
 
-      {/* LANDING AUTH PAGE */}
-      <Route path={['/login', '/signup']} exact>
-        <WelcomePage />
-      </Route>
+        {/* LANDING AUTH PAGE */}
+        <Route path={['/login', '/signup']} exact>
+          <WelcomePage />
+        </Route>
 
-      {/* MAIN PAGE + SIDEBAR*/}
-      {match && (
-        <React.Fragment>
-          <aside className="sidebar">
-            <Sidebar refresh={refresh} />
-          </aside>
+        {/* MAIN PAGE + SIDEBAR*/}
+        {match && (
+          <React.Fragment>
+            <aside className="sidebar">
+              <Sidebar refresh={refresh} />
+            </aside>
 
-          <main className="content">
-            <Switch>
-              <Route path={notebookRoutes.nb} exact>
-                <NotesPage />
-              </Route>
-              <Route path={notebookRoutes.display} exact>
-                <DisplayNote />
-              </Route>
-              <Route path={notebookRoutes.editor.new} exact>
-                <Editor refresh={refreshToggler} />
-              </Route>
-              <Route path={notebookRoutes.editor.edit} exact>
-                <Editor />
-              </Route>
-            </Switch>
-          </main>
-        </React.Fragment>
-      )}
+            <main className="content">
+              <Switch>
+                <Route path={notebookRoutes.nb} exact>
+                  <NotesPage />
+                </Route>
+                <Route path={notebookRoutes.display} exact>
+                  <DisplayNote />
+                </Route>
+                <Route path={notebookRoutes.editor.new} exact>
+                  <Editor refresh={refreshToggler} />
+                </Route>
+                <Route path={notebookRoutes.editor.edit} exact>
+                  <Editor />
+                </Route>
+              </Switch>
+            </main>
+          </React.Fragment>
+        )}
 
+        <Route path="*">
+          <ErrorPage status="404" />
+        </Route>
+      </Switch>
       {/* FOOTER */}
       <footer className="footer"></footer>
     </div>

@@ -51,6 +51,13 @@
   justify-content: center;
 }
 
+.errorpage {
+  grid-column: 1 / span 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer {
   grid-column: 1 / span 3;
   background-color: #000;

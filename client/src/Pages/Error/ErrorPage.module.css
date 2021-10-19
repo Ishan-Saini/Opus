@@ -1,0 +1,59 @@
+.error-container {
+  width: 60%;
+  height: 80%;
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+.error-message__container {
+  grid-column: 1 / span 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.error-message__container h1 {
+  margin: 0 0 2rem 0;
+  font-size: 4rem;
+}
+
+.error-message__code {
+  margin: 1rem 2rem 0 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #777;
+}
+
+.error-message {
+  margin: 1rem 2rem;
+  font-size: 1.2rem;
+  color: #777;
+}
+
+.error-message__container button {
+  margin: 1rem 2rem;
+  padding: 0.6rem 1.2rem;
+  color: #fff;
+  background-color: #000;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  transition: 0.3s ease-in-out;
+}
+
+.error-message__container button:hover {
+  transform: scale(1.05);
+}
+
+.error-image__container {
+  grid-column: 2 / span 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-image__container img {
+  width: 80%;
+}

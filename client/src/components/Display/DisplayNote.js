@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import classes from './DisplayNote.module.css';
 import redraft from 'redraft';
@@ -29,14 +30,15 @@ const DisplayNote = (props) => {
     const fetchNote = async () => {
       try {
         setIsLoading(true);
-        const noteJson = await fetch(
-          `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/${noteId}`
-        );
-        const noteObj = await noteJson.json();
+        const res = await axios({
+          method: 'GET',
+          url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/${noteId}`,
+          withCredentials: true,
+        });
         setIsLoading(false);
-        setNote(noteObj.data);
+        setNote(res.data.data);
       } catch (err) {
-        console.warn(err);
+        console.log(err);
       }
     };
     fetchNote();
