@@ -1,31 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import useCheckUser from '../hooks/useCheckUser';
 
 const UserContext = React.createContext({
-  id: null,
-  userEmail: null,
-  userName: null,
+  user: null,
+  isLoggedIn: false,
+  isLoading: true,
+  login: () => {},
+  logout: () => {},
 });
 
 export const UserContextProvider = (props) => {
-  const [id, setId] = useState(null);
+  const { user, setUser, isLoading } = useCheckUser();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const currentUser = await fetch();
-    };
-  });
+  const isLoggedIn = !!user;
 
-  const idUpdateHandler = (id) => {
-    setId(id);
+  const loginHandler = (user) => {
+    setUser(user);
+  };
+
+  const logoutHandler = () => {
+    setUser(null);
+  };
+
+  const userContextValue = {
+    user,
+    isLoggedIn,
+    isLoading,
+    login: loginHandler,
+    logout: logoutHandler,
   };
 
   return (
-    <UserContext.Provider
-      value={{
-        id,
-        updateId: idUpdateHandler,
-      }}
-    >
+    <UserContext.Provider value={userContextValue}>
       {props.children}
     </UserContext.Provider>
   );

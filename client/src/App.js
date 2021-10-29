@@ -8,6 +8,7 @@ import NotesPage from './Pages/Notes/NotesPage';
 import Sidebar from './components/Layout/Sidebar/Sidebar';
 import Editor from './components/Notes/Editor';
 import ErrorPage from './Pages/Error/ErrorPage';
+import PrivateRoute from './Pages/PrivateRoute';
 
 const notebookRoutes = {
   nb: ['/notebooks', '/notebooks/:nbId', '/notebooks/:nbId/notes'],
@@ -34,13 +35,13 @@ function App() {
       </header>
 
       <Switch>
-        <Route path="/" exact>
-          <Redirect to="/notebooks" />
-        </Route>
-
         {/* LANDING AUTH PAGE */}
         <Route path={['/login', '/signup']} exact>
           <WelcomePage />
+        </Route>
+
+        <Route path="/" exact>
+          <Redirect to="/notebooks" />
         </Route>
 
         {/* MAIN PAGE + SIDEBAR*/}
@@ -52,18 +53,27 @@ function App() {
 
             <main className="content">
               <Switch>
-                <Route path={notebookRoutes.nb} exact>
-                  <NotesPage />
-                </Route>
-                <Route path={notebookRoutes.display} exact>
-                  <DisplayNote />
-                </Route>
-                <Route path={notebookRoutes.editor.new} exact>
-                  <Editor refresh={refreshToggler} />
-                </Route>
-                <Route path={notebookRoutes.editor.edit} exact>
-                  <Editor />
-                </Route>
+                <PrivateRoute
+                  path={notebookRoutes.nb}
+                  component={NotesPage}
+                  exact
+                />
+                <PrivateRoute
+                  path={notebookRoutes.display}
+                  component={DisplayNote}
+                  exact
+                />
+                <PrivateRoute
+                  refresh={refreshToggler}
+                  path={notebookRoutes.editor.new}
+                  component={Editor}
+                  exact
+                />
+                <PrivateRoute
+                  path={notebookRoutes.editor.edit}
+                  component={Editor}
+                  exact
+                />
               </Switch>
             </main>
           </React.Fragment>

@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import classes from './AuthForm.module.css';
+import UserContext from '../../../store/User-Context';
 
 const initialFormState = {
   name: '',
@@ -16,6 +17,7 @@ const AuthForm = (props) => {
   );
   const [authState, setAuthState] = useState(initialFormState);
   const history = useHistory();
+  const userCtx = useContext(UserContext);
 
   const authStateHandler = (e) => {
     const { name, value } = e.target;
@@ -33,7 +35,7 @@ const AuthForm = (props) => {
   const authSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      await axios({
+      const res = await axios({
         method: 'POST',
         url: `http://127.0.0.1:5000/api/v1/users/${
           isUser ? 'login' : 'signup'
@@ -48,6 +50,7 @@ const AuthForm = (props) => {
           password: authState.password,
         },
       });
+      userCtx.login(res.data.data.user);
       history.push('/notebooks');
     } catch (err) {
       console.log(err);
