@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './WelcomePage.module.css';
 import landingSvg from '../../images/landingSvg.svg';
 import AuthForm from '../../components/UI/AuthForm/AuthForm';
+import UserContext from '../../store/User-Context';
+import { Redirect } from 'react-router-dom';
+import Loading from '../../components/UI/Loading';
 
 const WelcomePage = (props) => {
+  const userCtx = useContext(UserContext);
+
+  if (userCtx.isLoading) return <Loading loading={userCtx.isLoading} />;
+  if (userCtx.isLoggedIn) return <Redirect to="/notebooks" />;
+
   return (
     <React.Fragment>
       <div className={`landing + ${classes.landingPage}`}>

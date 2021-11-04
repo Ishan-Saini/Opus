@@ -5,7 +5,7 @@ const Button = (props) => {
   return (
     <button
       type={props.type}
-      className={`${classes.button} + ${props.className}`}
+      className={`${classes.btn} + ${props.className}`}
       {...props.button}
       onMouseDown={props.onMouseDown}
       onClick={props.onClick}
