@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const noteSchema = new mongoose.Schema({
+  notebook: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Notebook',
+  },
   content: {
     type: Object,
     required: [true, 'Content object is required'],

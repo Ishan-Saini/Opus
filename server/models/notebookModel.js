@@ -10,12 +10,6 @@ const notebookSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Notebook title is required'],
   },
-  notes: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Note',
-    },
-  ],
 });
 
 notebookSchema.pre(/^find/, function (next) {

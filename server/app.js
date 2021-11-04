@@ -1,4 +1,5 @@
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const express = require('express');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -24,10 +25,16 @@ const limiter = rateLimit({
 
 app.use('/api', limiter);
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://127.0.0.1:3000',
+  })
+);
 
 // Body parser
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 app.use(mongoSanitize());
 

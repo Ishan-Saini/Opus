@@ -1,3 +1,5 @@
+const { promisify } = require('util');
+const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const asyncUtility = require('../util/AsyncUtility');
 const ErrorUtility = require('../util/ErrorUtilityClass');
@@ -9,6 +11,40 @@ const filterFields = (obj, ...fields) => {
   });
   return newObj;
 };
+
+exports.checkUser = asyncUtility(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    const token = req.cookies.jwt;
+
+    const decoded = await promisify(jwt.verify)(
+      token,
+      process.env.JWT_SECRET_KEY
+    );
+
+    const loggedInUser = await User.findById(decoded.id);
+
+    if (!loggedInUser)
+      return next(new ErrorUtility('This user has been deleted!', 401));
+
+    if (loggedInUser.isPasswordChanged(decoded.iat)) {
+      return next(
+        new ErrorUtility(
+          'Password has been changed recently, please log in again!',
+          401
+        )
+      );
+    }
+
+    res.status(200).json({
+      message: 'success',
+      data: {
+        user: loggedInUser,
+      },
+    });
+  } else {
+    return next(new ErrorUtility('Please login again!', 401));
+  }
+});
 
 exports.updateProfile = asyncUtility(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm)

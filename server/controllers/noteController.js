@@ -3,9 +3,9 @@ const asyncUtility = require('../util/AsyncUtility');
 const ErrorUtility = require('../util/ErrorUtilityClass');
 
 exports.getAllNotes = asyncUtility(async (req, res, next) => {
-  const notesData = await Note.find(req.params.notebookId).select(
-    '-content -created'
-  );
+  const notesData = await Note.find({
+    notebook: req.params.notebookId,
+  }).select('-content -created');
   res.status(200).json({
     status: 'success',
     data: notesData,
@@ -30,6 +30,7 @@ exports.createNote = asyncUtility(async (req, res, next) => {
     content: req.body.content,
     title: req.body.title,
     tags: req.body.tags,
+    notebookId: req.body.notebookId,
   });
 
   const newNote = await noteInstance.save();
