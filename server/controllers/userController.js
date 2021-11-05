@@ -42,7 +42,7 @@ exports.checkUser = asyncUtility(async (req, res, next) => {
       },
     });
   } else {
-    return next(new ErrorUtility('Please login again!', 401));
+    return next(new ErrorUtility('Please login!', 401));
   }
 });
 

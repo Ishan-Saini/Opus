@@ -103,6 +103,17 @@ exports.protect = asyncUtility(async (req, res, next) => {
   next();
 });
 
+exports.logout = asyncUtility(async (req, res, next) => {
+  res.cookie('jwt', 'userLoggedOut', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+  });
+});
+
 exports.forgotPassword = asyncUtility(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
