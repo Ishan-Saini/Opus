@@ -1,5 +1,6 @@
 import React from 'react';
 import useCheckUser from '../hooks/useCheckUser';
+import axios from 'axios';
 
 const UserContext = React.createContext({
   user: null,
@@ -18,8 +19,17 @@ export const UserContextProvider = (props) => {
     setUser(user);
   };
 
-  const logoutHandler = () => {
-    setUser(null);
+  const logoutHandler = async () => {
+    try {
+      await axios({
+        method: 'GET',
+        url: 'http://127.0.0.1:5000/api/v1/users/logout',
+        withCredentials: true,
+      });
+      window.location.reload(true);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const userContextValue = {

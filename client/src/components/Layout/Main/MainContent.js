@@ -15,26 +15,20 @@ const notebookRoutes = {
 
 const MainContent = () => {
   return (
-    <main className="content">
-      <Switch>
-        <PrivateRoute path={notebookRoutes.nb} component={NotesPage} exact />
-        <PrivateRoute
-          path={notebookRoutes.display}
-          component={DisplayNote}
-          exact
-        />
-        <PrivateRoute
-          path={notebookRoutes.editor.new}
-          component={Editor}
-          exact
-        />
-        <PrivateRoute
-          path={notebookRoutes.editor.edit}
-          component={Editor}
-          exact
-        />
-      </Switch>
-    </main>
+    <Switch>
+      <PrivateRoute path={notebookRoutes.nb} component={NotesPage} exact />
+      <PrivateRoute
+        path={notebookRoutes.display}
+        component={DisplayNote}
+        exact
+      />
+      <PrivateRoute path={notebookRoutes.editor.new} component={Editor} exact />
+      <PrivateRoute
+        path={notebookRoutes.editor.edit}
+        component={Editor}
+        exact
+      />
+    </Switch>
   );
 };
 

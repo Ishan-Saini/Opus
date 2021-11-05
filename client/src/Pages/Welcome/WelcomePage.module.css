@@ -2,17 +2,13 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  position: relative;
 }
 
 .landing-svg__container {
   grid-column: 1 / span 3;
   grid-row: 1 / span 2;
   width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  bottom: 15%;
+  margin: auto;
 }
 
 .landing-svg__container img {
