@@ -18,6 +18,7 @@
 .heading {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .heading h2 {

@@ -1,0 +1,104 @@
+.user-profile {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 65vw;
+  height: 60vh;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.svg-container {
+  padding: 1rem;
+  position: relative;
+}
+
+.user-svg {
+  width: 90%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.user-info__container {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.user-info {
+  height: 30%;
+  width: 60%;
+  color: #fff;
+  display: grid;
+  font-size: 1.2rem;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: repeat(3, 1fr);
+  text-align: left;
+}
+
+.user-info__field {
+  font-weight: 600;
+}
+
+.user-info__btn {
+  grid-column: 1 / span 2;
+}
+
+.user-info__btn button {
+  width: 100%;
+  padding: 0.6rem;
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  font-weight: 400;
+  letter-spacing: 1px;
+  border-radius: 3px;
+}
+
+.user-info__btn button:hover,
+.change-password-btn > button:hover {
+  background-color: #f3f2f2;
+}
+
+.change-password {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  width: 60%;
+}
+
+.change-password > label {
+  margin-bottom: 0.5rem;
+}
+
+.change-password > input {
+  margin-bottom: 1rem;
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.5rem;
+  font-size: 1rem;
+}
+
+.change-password-btn__container {
+  margin-top: 0.75rem;
+  text-align: right;
+}
+
+.change-password-btn {
+  padding: 0.4rem 0.4rem;
+  cursor: pointer;
+  border: none;
+  margin-left: 1rem;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+.change-success__container > button {
+  float: right;
+  margin-top: 1rem;
+}

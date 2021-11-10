@@ -5,6 +5,7 @@ import WelcomePage from './Pages/Welcome/WelcomePage';
 import Header from './components/Layout/Header/Header';
 import ErrorPage from './Pages/Error/ErrorPage';
 import MainContent from './components/Layout/Main/MainContent';
+import User from './Pages/User/User';
 
 function App() {
   return (
@@ -20,11 +21,15 @@ function App() {
           <WelcomePage />
         </Route>
 
+        <Route path="/user" exact>
+          <User />
+        </Route>
+
         <Route path="/" exact>
           <Redirect to="/notebooks" />
         </Route>
 
-        {/* MAIN PAGE */}
+        {/* MAIN PAGE + SIDEBAR*/}
         <Route path="/notebooks">
           <MainContent />
         </Route>
