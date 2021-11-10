@@ -183,8 +183,8 @@ exports.updatePassword = asyncUtility(async (req, res, next) => {
   if (!(await user.checkPassword(req.body.currentPassword, user.password)))
     return next(new ErrorUtility('Password is incorrect.', 401));
 
-  user.password = req.body.password;
-  user.passwordConfirm = req.body.passwordConfirm;
+  user.password = req.body.newPassword;
+  user.passwordConfirm = req.body.confirmPassword;
   await user.save();
 
   generateToken(user, 200, res);
