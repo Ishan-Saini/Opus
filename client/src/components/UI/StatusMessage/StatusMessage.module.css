@@ -3,6 +3,7 @@
   width: 100%;
   word-wrap: break-word;
   border-radius: 4px;
+  margin-top: 1rem;
 }
 
 .success-msg {
@@ -11,6 +12,6 @@
 }
 
 .error-msg {
-  background-color: rgba(255, 181, 181, 0.561);
+  background-color: rgba(255, 177, 177, 0.657);
   border-left: 0.3rem solid red;
 }

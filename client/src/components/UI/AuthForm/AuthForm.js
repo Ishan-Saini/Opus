@@ -3,12 +3,14 @@ import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import classes from './AuthForm.module.css';
 import UserContext from '../../../store/User-Context';
+import StatusMessage from '../StatusMessage/StatusMessage';
 
 const initialFormState = {
   name: '',
   email: '',
   password: '',
   passwordConfirm: '',
+  errorMessage: '',
 };
 
 const AuthForm = (props) => {
@@ -29,6 +31,10 @@ const AuthForm = (props) => {
   };
 
   const switchLinkHandler = () => {
+    setAuthState({
+      ...authState,
+      errorMessage: '',
+    });
     setIsUser((bool) => !bool);
   };
 
@@ -50,10 +56,17 @@ const AuthForm = (props) => {
           password: authState.password,
         },
       });
+      setAuthState({
+        ...authState,
+        errorMessage: '',
+      });
       userCtx.login(res.data.data.user);
       history.push('/notebooks');
     } catch (err) {
-      console.log(err);
+      setAuthState({
+        ...authState,
+        errorMessage: err.response.data.message,
+      });
     }
   };
 
@@ -110,6 +123,10 @@ const AuthForm = (props) => {
             onChange={authStateHandler}
           />
         </>
+      )}
+
+      {authState.errorMessage && (
+        <StatusMessage status="error" message={authState.errorMessage} />
       )}
 
       <button type="submit" className={classes.submitBtn}>
