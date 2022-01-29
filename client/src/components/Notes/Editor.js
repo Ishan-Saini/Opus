@@ -31,29 +31,25 @@ const Editor = (props) => {
     e.preventDefault();
     const raw = convertToRaw(editorState.getCurrentContent());
     const tagsArr = tags.replace(/ /g, '').split(',');
-    let noteId = null;
-    if (title !== '') {
-      if (tagsArr.length <= 3) {
-        // UX
-        const contentObj = {
-          title,
-          tags: tagsArr,
-          content: raw,
-          notebook: nbId,
-        };
-        try {
-          const res = await axios({
-            method: 'POST',
-            url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`,
-            withCredentials: true,
-            data: contentObj,
-          });
-          noteId = res.data.data._id;
-        } catch (err) {
-          console.log(err);
-        }
+
+    if (title !== '' && tagsArr.length <= 3) {
+      // UX
+      const contentObj = {
+        title,
+        tags: tagsArr,
+        content: raw,
+        notebook: nbId,
+      };
+      try {
+        await axios({
+          method: 'POST',
+          url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`,
+          withCredentials: true,
+          data: contentObj,
+        });
+      } catch (err) {
+        console.log(err);
       }
-      props.refresh(true);
     }
     //history.push(`/notebooks/${nbId}/notes/${noteId}`);
   };

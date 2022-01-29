@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import classes from './NbHeader.module.css';
 import { BsPlusSquareFill } from 'react-icons/bs';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
+import UserContext from '../../../../store/User-Context';
 
 const NbHeader = () => {
   const [isEntering, setIsEntering] = useState(false);
   const [titleInput, setTitleInput] = useState('');
+  const userCtx = useContext(UserContext);
 
   const closeInputHandler = () => {
     setIsEntering(false);
@@ -25,15 +28,14 @@ const NbHeader = () => {
 
     const notebookObj = {
       title: titleInput,
+      user: userCtx.user._id,
     };
-    const notebook = JSON.stringify(notebookObj);
 
-    await fetch('http://127.0.0.1:5000/api/v1/notebooks/', {
+    await axios({
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: notebook,
+      url: `http://127.0.0.1:5000/api/v1/notebooks/`,
+      withCredentials: true,
+      data: notebookObj,
     });
 
     setIsEntering(false);

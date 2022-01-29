@@ -11,10 +11,31 @@
   padding: 0.5rem;
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
 }
 
 .nbTile-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 90%;
+}
+
+.nbTile-trash-icon-wrapper {
+  width: 9%;
+}
+
+.nbTile-trash-icon {
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.nbTile-trash-icon:hover {
+  transform: scale(1.1);
+  transition: 0s;
+}
+
+.nbTile:hover .nbTile-trash-icon {
+  visibility: visible;
 }
