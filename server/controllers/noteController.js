@@ -30,7 +30,7 @@ exports.createNote = asyncUtility(async (req, res, next) => {
     content: req.body.content,
     title: req.body.title,
     tags: req.body.tags,
-    notebookId: req.body.notebookId,
+    notebook: req.body.notebook,
   });
 
   const newNote = await noteInstance.save();

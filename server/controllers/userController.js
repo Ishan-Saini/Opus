@@ -21,7 +21,9 @@ exports.checkUser = asyncUtility(async (req, res, next) => {
       process.env.JWT_SECRET_KEY
     );
 
-    const loggedInUser = await User.findById(decoded.id);
+    const loggedInUser = await User.findById(decoded.id).select(
+      '-passwordChangedAt'
+    );
 
     if (!loggedInUser)
       return next(new ErrorUtility('This user has been deleted!', 401));
