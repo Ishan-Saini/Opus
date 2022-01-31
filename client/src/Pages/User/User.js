@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import classes from './User.module.css';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import UserContext from '../../store/User-Context';
 import userInfo from '../../images/user-info.svg';
 import ChangePassword from './ChangePassword';
@@ -8,6 +8,7 @@ import ChangePassword from './ChangePassword';
 const User = () => {
   const [isClicked, setIsClicked] = useState(false);
   const userCtx = useContext(UserContext);
+  const history = useHistory();
 
   if (!userCtx.isLoggedIn) return <Redirect to="/login" />;
 
@@ -17,6 +18,10 @@ const User = () => {
 
   const cancelBtnHandler = () => {
     setIsClicked(false);
+  };
+
+  const onCancelHandler = () => {
+    history.replace('/notebooks/');
   };
 
   return (
@@ -34,6 +39,9 @@ const User = () => {
             <div className={classes['user-info__btn']}>
               <button type="button" onClick={changePassBtnHandler}>
                 CHANGE PASSWORD
+              </button>
+              <button type="button" onClick={onCancelHandler}>
+                BACK
               </button>
             </div>
           </div>

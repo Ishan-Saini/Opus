@@ -47,6 +47,7 @@
 
 .user-info__btn {
   grid-column: 1 / span 2;
+  margin-top: 0.5rem;
 }
 
 .user-info__btn button {
@@ -58,6 +59,7 @@
   font-weight: 400;
   letter-spacing: 1px;
   border-radius: 3px;
+  margin-bottom: 0.5rem;
 }
 
 .user-info__btn button:hover,

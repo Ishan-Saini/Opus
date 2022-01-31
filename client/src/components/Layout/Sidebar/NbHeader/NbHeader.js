@@ -39,6 +39,7 @@ const NbHeader = (props) => {
     });
 
     setIsEntering(false);
+    setTitleInput('');
     props.refresh();
   };
 

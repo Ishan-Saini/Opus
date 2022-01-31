@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import classes from './NotesTiles.module.css';
@@ -7,46 +6,12 @@ import { IoOpenOutline } from 'react-icons/io5';
 import Loading from '../../../UI/Loading';
 
 const NotesTiles = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [notesArr, setNotesArr] = useState([]);
   const history = useHistory();
   const match = useRouteMatch({
     path: '/notebooks/:nbId',
   });
 
   let nbId = match ? match.params.nbId : null;
-
-  useEffect(() => {
-    const fetchNotes = async () => {
-      if (!nbId) {
-        setIsLoading(false);
-        setNotesArr([]);
-        return;
-      }
-      try {
-        setIsLoading(true);
-        const res = await axios({
-          method: 'GET',
-          url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`,
-          withCredentials: true,
-        });
-        const notesData = res.data.data;
-        const notesList = [];
-        for (const key in notesData) {
-          notesList.push({
-            id: notesData[key]._id,
-            title: notesData[key].title,
-            tags: notesData[key].tags,
-          });
-        }
-        setIsLoading(false);
-        setNotesArr(notesList);
-      } catch (err) {
-        console.warn(err);
-      }
-    };
-    fetchNotes();
-  }, [nbId]);
 
   const noteOpenHandler = (e) => {
     const id = e.currentTarget.parentNode.dataset.noteid;
@@ -63,28 +28,29 @@ const NotesTiles = (props) => {
     });
 
     history.push(`/notesbook/${nbId}/notes/`);
+    props.refresh();
   };
 
   let notesTileContent = null;
 
-  if (isLoading) {
+  if (props.isLoading) {
     notesTileContent = (
       <div className={classes['loader_wrapper']}>
-        <Loading loading={isLoading} size={25} />
+        <Loading loading={props.isLoading} size={25} />
       </div>
     );
   }
 
-  if (!isLoading) {
+  if (!props.isLoading) {
     notesTileContent = (
       <p className={classes['Empty-Sidebar-Msg']}>Nothing in here!</p>
     );
   }
 
-  if (notesArr.length !== 0) {
+  if (props.notesArr.length !== 0) {
     notesTileContent = (
       <ul className={classes['notes-tile-wrapper']}>
-        {notesArr.map((tile) => {
+        {props.notesArr.map((tile) => {
           return (
             <li
               className={classes['notes-tile']}
