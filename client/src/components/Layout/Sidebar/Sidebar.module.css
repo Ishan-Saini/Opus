@@ -27,20 +27,12 @@
   background-color: #dadada;
   overflow-y: auto;
   overflow-x: hidden;
-  overflow: auto;
   position: relative;
   padding: 0.5rem;
 }
 
 .notes-tile__container {
-  height: 93%;
+  height: 90%;
   overflow-y: auto;
   overflow-x: hidden;
-}
-
-.loader_wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

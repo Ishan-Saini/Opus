@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import classes from './DisplayNote.module.css';
 import redraft from 'redraft';
-import { FaTags, FaCalendarTimes } from 'react-icons/fa';
+import { FaTags, FaCalendarTimes, FaEdit, FaWindowClose } from 'react-icons/fa';
 import { inline } from './DisplayUtil/inline';
 import { blocks } from './DisplayUtil/blocks';
 import { entities } from './DisplayUtil/entities';
@@ -25,6 +25,11 @@ const DisplayNote = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const { noteId, nbId } = params;
+  const history = useHistory();
+
+  const closeDisplayNoteHandler = () => {
+    history.replace(`/notebooks/${nbId}/notes/`);
+  };
 
   useEffect(() => {
     const fetchNote = async () => {
@@ -74,18 +79,27 @@ const DisplayNote = (props) => {
     displayContent = (
       <div className={classes.displayWrapper}>
         <div className={classes.headerWrapper}>
-          <div className={classes.titleWrapper}>
-            <h1>{note.title}</h1>
-          </div>
-          {tagsContent && (
-            <div className={classes.tagsWrapper}>
-              <FaTags />
-              {tagsContent}
+          <div>
+            <div className={classes.titleWrapper}>
+              <h1>{note.title}</h1>
             </div>
-          )}
-          <div className={classes.dateWrapper}>
-            <FaCalendarTimes />
-            <p>{note.created.slice(0, 10)}</p>
+            {tagsContent && (
+              <div className={classes.tagsWrapper}>
+                <FaTags />
+                {tagsContent}
+              </div>
+            )}
+            <div className={classes.dateWrapper}>
+              <FaCalendarTimes />
+              <p>{note.created.slice(0, 10)}</p>
+            </div>
+          </div>
+          <div className={classes['displayNote-util-icon-wrapper']}>
+            <FaEdit className={classes['displayNote-util-icon']} />
+            <FaWindowClose
+              className={classes['displayNote-util-icon']}
+              onClick={closeDisplayNoteHandler}
+            />
           </div>
         </div>
         <div className={classes.contentWrapper}>{rendered}</div>

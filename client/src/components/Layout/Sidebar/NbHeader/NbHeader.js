@@ -6,7 +6,7 @@ import { FaCheck, FaTimes } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import UserContext from '../../../../store/User-Context';
 
-const NbHeader = () => {
+const NbHeader = (props) => {
   const [isEntering, setIsEntering] = useState(false);
   const [titleInput, setTitleInput] = useState('');
   const userCtx = useContext(UserContext);
@@ -39,18 +39,19 @@ const NbHeader = () => {
     });
 
     setIsEntering(false);
+    props.refresh();
   };
 
   return (
     <div className={classes['notebooks-header__container']}>
       {!isEntering && (
         <React.Fragment>
-          <div>NOTEBOOKS</div>
+          <div className={classes['notebooks-header']}>NOTEBOOKS</div>
           <div
             className={classes['notebooks-header__btn']}
             onClick={openInputHandler}
           >
-            <IconContext.Provider value={{ size: '1.2rem' }}>
+            <IconContext.Provider value={{ size: '1.0rem' }}>
               <BsPlusSquareFill />
             </IconContext.Provider>
           </div>

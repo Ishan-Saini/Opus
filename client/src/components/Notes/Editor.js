@@ -34,6 +34,7 @@ const Editor = (props) => {
 
     if (title !== '' && tagsArr.length <= 3) {
       // UX
+      let noteId;
       const contentObj = {
         title,
         tags: tagsArr,
@@ -41,17 +42,18 @@ const Editor = (props) => {
         notebook: nbId,
       };
       try {
-        await axios({
+        const res = await axios({
           method: 'POST',
           url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`,
           withCredentials: true,
           data: contentObj,
         });
+        noteId = res.data.data.notes._id;
       } catch (err) {
         console.log(err);
       }
+      history.push(`/notebooks/${nbId}/notes/${noteId}`);
     }
-    //history.push(`/notebooks/${nbId}/notes/${noteId}`);
   };
 
   const history = useHistory();

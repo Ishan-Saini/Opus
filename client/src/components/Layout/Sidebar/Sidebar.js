@@ -39,19 +39,15 @@ const Sidebar = (props) => {
     fetchNotebooks();
   }, [props.refresh, refresh]);
 
-  const refreshToggler = (bool) => {
+  const refreshToggler = () => {
     setRefresh((bool) => !bool);
   };
 
   return (
     <div className={classes['sidebar-wrapper']}>
       <div className={classes['sidebar-notebooks__container']}>
-        <NbHeader />
-        {isLoading && (
-          <div className={classes['loader_wrapper']}>
-            <Loading loading={isLoading} size={25} />
-          </div>
-        )}
+        <NbHeader refresh={refreshToggler} />
+        {isLoading && <Loading loading={isLoading} size={25} />}
         <div className={classes['notebooks-tile__container']}>
           <NotebookTile notebooksArr={notebooksList} refresh={refreshToggler} />
         </div>

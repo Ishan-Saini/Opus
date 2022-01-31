@@ -10,16 +10,19 @@ const NotesTiles = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [notesArr, setNotesArr] = useState([]);
   const history = useHistory();
-  let nbId;
   const match = useRouteMatch({
     path: '/notebooks/:nbId',
   });
 
-  nbId = match ? match.params.nbId : null;
+  let nbId = match ? match.params.nbId : null;
 
   useEffect(() => {
     const fetchNotes = async () => {
-      if (!nbId) return;
+      if (!nbId) {
+        setIsLoading(false);
+        setNotesArr([]);
+        return;
+      }
       try {
         setIsLoading(true);
         const res = await axios({

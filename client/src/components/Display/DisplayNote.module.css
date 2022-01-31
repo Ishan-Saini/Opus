@@ -13,10 +13,12 @@
 .headerWrapper {
   background-color: rgb(185, 185, 185);
   padding: 1rem 1rem;
+  display: grid;
+  grid-template-columns: 80% 19%;
 }
 
 .titleWrapper h1 {
-  font-size: 2.3rem;
+  font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
 
@@ -28,7 +30,7 @@
   background-color: #777;
   color: #fff;
   padding: 0.2rem 0.3rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .tagsWrapper span:not(:first-child) {
@@ -42,7 +44,7 @@
 }
 
 .contentWrapper {
-  padding: 2rem 1.5rem;
+  padding: 0.5rem 1.5rem;
 }
 
 .contentWrapper h1 {
@@ -77,4 +79,21 @@
 
 .contentWrapper ul {
   margin-left: 1rem;
+}
+
+.displayNote-util-icon-wrapper {
+  grid-column: 2 / span 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.displayNote-util-icon {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.displayNote-util-icon:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
 }

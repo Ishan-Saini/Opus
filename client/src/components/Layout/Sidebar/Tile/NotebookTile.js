@@ -19,6 +19,8 @@ const NotebookTile = (props) => {
       method: 'DELETE',
       withCredentials: true,
     });
+    history.push(`/notebooks/`);
+    props.refresh();
     // UX
   };
 

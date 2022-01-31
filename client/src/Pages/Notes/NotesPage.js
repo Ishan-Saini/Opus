@@ -10,6 +10,7 @@ const NotesPage = (props) => {
   const { nbId } = useParams();
 
   const newNoteBtnHandler = () => {
+    if (!nbId) return; // UX
     history.push(`/notebooks/${nbId}/editor`);
   };
 
