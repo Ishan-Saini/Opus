@@ -14,6 +14,7 @@ const Sidebar = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isNotesLoading, setIsNotesLoading] = useState(false);
   const [refresh, setRefresh] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
 
   const matchNotebookRoutes = useRouteMatch({
     path: '/notebooks/:nbId',
@@ -27,6 +28,7 @@ const Sidebar = (props) => {
 
   useEffect(() => {
     const fetchNotebooks = async () => {
+      if (isSearch) return;
       try {
         setIsLoading(true);
 
@@ -56,6 +58,7 @@ const Sidebar = (props) => {
         setNotesArr([]);
         return;
       }
+      if (isSearch) return;
       try {
         setIsNotesLoading(true);
         const res = await axios({
@@ -81,10 +84,18 @@ const Sidebar = (props) => {
 
     fetchNotebooks();
     fetchNotes();
-  }, [props.refresh, refresh, nbId, noteId]);
+  }, [props.refresh, refresh, nbId, noteId, isSearch]);
 
   const refreshToggler = () => {
     setRefresh((bool) => !bool);
+  };
+
+  const searchToggler = (bool) => {
+    if (bool !== isSearch) setIsSearch(bool);
+  };
+
+  const notesArrayStateHandler = (arr) => {
+    setNotesArr(arr);
   };
 
   return (
@@ -97,7 +108,11 @@ const Sidebar = (props) => {
         </div>
       </div>
       <div className={classes['sidebar-notes__container']}>
-        <Search />
+        <Search
+          list={notesArr}
+          searchToggler={searchToggler}
+          setNotesState={notesArrayStateHandler}
+        />
         <div className={classes['notes-tile__container']}>
           <NotesTiles
             notesArr={notesArr}

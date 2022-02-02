@@ -26,6 +26,10 @@
   background: none;
 }
 
+.search-input::placeholder {
+  font-size: 0.85rem;
+}
+
 .search-btn__container {
   width: 9%;
 }
