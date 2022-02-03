@@ -67,3 +67,21 @@
   grid-row: 3 / span 3;
   background-color: #000;
 }
+
+@media screen and (max-width: 768px) {
+  .App {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+  }
+
+  .content {
+    display: none;
+    grid-column: 1 / span 1;
+  }
+
+  .footer {
+    grid-column: 1 / span 1;
+  }
+}

@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import classes from './Dropdown.module.css';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { FaRegUserCircle, FaRegUser } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
+import { GrLogout } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import UserContext from '../../../store/User-Context';
 
@@ -14,17 +15,26 @@ const Dropdown = () => {
 
   return (
     <div className={classes.dropdown}>
-      <IconContext.Provider value={{ color: 'white', size: '1.2rem' }}>
-        <button className={classes['dropdown-btn']}>
-          <FaRegUserCircle />
-        </button>
+      <button className={classes['dropdown-btn']}>
+        <FaRegUserCircle />
+      </button>
+      <IconContext.Provider value={{ color: 'black', size: '1rem' }}>
+        <div className={classes['dropdown-menu']}>
+          <Link to="/user">
+            <div className={classes['dropdown-menu-item']}>
+              <FaRegUser />
+              <button type="button">User Profile</button>
+            </div>
+          </Link>
+          <div
+            className={classes['dropdown-menu-item']}
+            onClick={logoutHandler}
+          >
+            <GrLogout />
+            <button type="button">Logout</button>
+          </div>
+        </div>
       </IconContext.Provider>
-      <div className={classes['dropdown-menu']}>
-        <Link to="/user">User Profile</Link>
-        <button type="button" onClick={logoutHandler}>
-          Logout
-        </button>
-      </div>
     </div>
   );
 };

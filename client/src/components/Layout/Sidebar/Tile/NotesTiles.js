@@ -27,7 +27,7 @@ const NotesTiles = (props) => {
       withCredentials: true,
     });
 
-    history.push(`/notesbook/${nbId}/notes/`);
+    history.push(`/notebooks/${nbId}/notes/`);
     props.refresh();
   };
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import classes from './Header.module.css';
 import { useHistory } from 'react-router-dom';
-import { FaRegStickyNote } from 'react-icons/fa';
+import { FaRegStickyNote, FaBook } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import Dropdown from './Dropdown';
 import UserContext from '../../../store/User-Context';
@@ -22,7 +22,16 @@ const Header = () => {
           <h2>OPUS</h2>
         </div>
       </IconContext.Provider>
-      {userCtx.isLoggedIn && <Dropdown />}
+      <IconContext.Provider value={{ color: 'white', size: '1.1rem' }}>
+        <div className={classes['header-icons']}>
+          {userCtx.isLoggedIn && (
+            <button type="button" className={classes['header-icons__sidebar']}>
+              <FaBook />
+            </button>
+          )}
+          {userCtx.isLoggedIn && <Dropdown />}
+        </div>
+      </IconContext.Provider>
     </div>
   );
 };

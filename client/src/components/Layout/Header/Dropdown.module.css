@@ -20,29 +20,37 @@
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.2s ease-in-out;
+  border-top: 4px solid #636363;
 }
 
-.dropdown-menu a,
-.dropdown-menu button {
-  text-decoration: none;
-  padding: 0.5rem;
-  color: #000;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.dropdown-menu-item {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
   width: 100%;
-  display: block;
+  color: #000;
+  letter-spacing: 0.5px;
   font-size: 0.9rem;
-  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
-.dropdown-menu button {
+.dropdown-menu a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-menu-item > svg {
+  margin-right: 0.3rem;
+}
+
+.dropdown-menu-item button {
   background: transparent;
   border: none;
   cursor: pointer;
 }
 
-.dropdown-menu a:hover,
-.dropdown-menu button:hover {
+.dropdown-menu-item:hover {
   background: #bbbbbb;
 }
 
