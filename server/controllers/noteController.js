@@ -36,6 +36,8 @@ exports.createNote = asyncUtility(async (req, res, next) => {
   const newNote = await noteInstance.save();
   res.status(201).json({
     status: 'success',
-    notes: newNote,
+    data: {
+      notes: newNote,
+    },
   });
 });
