@@ -7,6 +7,7 @@ import NotesTiles from './Tile/NotesTiles';
 import Loading from '../../UI/Loading';
 import NbHeader from './NbHeader/NbHeader';
 import NotebookTile from './Tile/NotebookTile';
+import { toast } from 'react-toastify';
 
 const Sidebar = (props) => {
   const [notebooksList, setNotebooksList] = useState([]);
@@ -48,7 +49,7 @@ const Sidebar = (props) => {
         setIsLoading(false);
         setNotebooksList(notebooksArr);
       } catch (err) {
-        console.log(err);
+        toast.error(err.response.data.message);
       }
     };
 
@@ -78,7 +79,7 @@ const Sidebar = (props) => {
         setIsNotesLoading(false);
         setNotesArr(notesList);
       } catch (err) {
-        console.warn(err);
+        toast.error(err.response.data.message);
       }
     };
 

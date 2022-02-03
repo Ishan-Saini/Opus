@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useHistory, Link } from 'react-router-dom';
+import Toast from '../../components/UI/Toast/Toast';
 import classes from './User.module.css';
 import axios from 'axios';
-import StatusMessage from '../../components/UI/StatusMessage/StatusMessage';
 
 const initialPasswordState = {
   currentPassword: '',
@@ -11,8 +13,7 @@ const initialPasswordState = {
 
 const ChangePassword = (props) => {
   const [passwordState, setPasswordState] = useState(initialPasswordState);
-  const [status, setStatus] = useState('');
-  const [msg, setMsg] = useState('');
+  const history = useHistory();
 
   const passChangeHandler = async (e) => {
     e.preventDefault();
@@ -28,11 +29,10 @@ const ChangePassword = (props) => {
           confirmPassword: passwordState.confirmPassword,
         },
       });
-      setStatus('success');
-      setMsg('Password changed successfully');
+      toast.success('Password changed successfully!');
+      history.replace('/user/');
     } catch (err) {
-      setStatus('error');
-      setMsg(err.response.data.message);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -45,63 +45,40 @@ const ChangePassword = (props) => {
     });
   };
 
-  const cancelBtnHandler = () => {
-    props.cancelBtn();
-  };
-
   return (
     <React.Fragment>
-      {status !== 'success' && (
-        <form
-          onSubmit={passChangeHandler}
-          className={classes['change-password']}
-        >
-          <label htmlFor="curretPass">CURRENT PASSWORD :</label>
-          <input
-            type="password"
-            name="currentPassword"
-            value={passwordState.currentPassword}
-            onChange={passwordStateHandler}
-          />
-          <label htmlFor="newPass">NEW PASSWORD :</label>
-          <input
-            type="password"
-            name="newPassword"
-            value={passwordState.newPassword}
-            onChange={passwordStateHandler}
-          />
-          <label htmlFor="confirmPass">CONFIRM PASSWORD :</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={passwordState.confirmPassword}
-            onChange={passwordStateHandler}
-          />
-          {status && <StatusMessage status={status} message={msg} />}
-          <div className={classes['change-password-btn__container']}>
-            <button className={classes['change-password-btn']}>SAVE</button>
-            <button
-              className={classes['change-password-btn']}
-              type="button"
-              onClick={cancelBtnHandler}
-            >
+      <form onSubmit={passChangeHandler} className={classes['change-password']}>
+        <label htmlFor="curretPass">CURRENT PASSWORD :</label>
+        <input
+          type="password"
+          name="currentPassword"
+          value={passwordState.currentPassword}
+          onChange={passwordStateHandler}
+        />
+        <label htmlFor="newPass">NEW PASSWORD :</label>
+        <input
+          type="password"
+          name="newPassword"
+          value={passwordState.newPassword}
+          onChange={passwordStateHandler}
+        />
+        <label htmlFor="confirmPass">CONFIRM PASSWORD :</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          value={passwordState.confirmPassword}
+          onChange={passwordStateHandler}
+        />
+        <div className={classes['change-password-btn__container']}>
+          <button className={classes['change-password-btn']}>SAVE</button>
+          <Link to="/user">
+            <button className={classes['change-password-btn']} type="button">
               CANCEL
             </button>
-          </div>
-        </form>
-      )}
-      {status === 'success' && (
-        <div className={classes['change-success__container']}>
-          <StatusMessage status={status} message={msg} />
-          <button
-            className={classes['change-password-btn']}
-            type="button"
-            onClick={cancelBtnHandler}
-          >
-            BACK
-          </button>
+          </Link>
         </div>
-      )}
+      </form>
+      <Toast />
     </React.Fragment>
   );
 };

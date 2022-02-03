@@ -1,16 +1,16 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Toast from '../Toast/Toast';
 import classes from './AuthForm.module.css';
 import UserContext from '../../../store/User-Context';
-import StatusMessage from '../StatusMessage/StatusMessage';
 
 const initialFormState = {
   name: '',
   email: '',
   password: '',
   passwordConfirm: '',
-  errorMessage: '',
 };
 
 const AuthForm = (props) => {
@@ -31,10 +31,6 @@ const AuthForm = (props) => {
   };
 
   const switchLinkHandler = () => {
-    setAuthState({
-      ...authState,
-      errorMessage: '',
-    });
     setIsUser((bool) => !bool);
   };
 
@@ -56,17 +52,10 @@ const AuthForm = (props) => {
           password: authState.password,
         },
       });
-      setAuthState({
-        ...authState,
-        errorMessage: '',
-      });
       userCtx.login(res.data.data.user);
       history.push('/notebooks');
     } catch (err) {
-      setAuthState({
-        ...authState,
-        errorMessage: err.response.data.message,
-      });
+      toast.error(err.response.data.message);
     }
   };
 
@@ -125,10 +114,6 @@ const AuthForm = (props) => {
         </>
       )}
 
-      {authState.errorMessage && (
-        <StatusMessage status="error" message={authState.errorMessage} />
-      )}
-
       <button type="submit" className={classes.submitBtn}>
         {isUser ? 'LOGIN' : 'SIGNUP'}
       </button>
@@ -139,6 +124,7 @@ const AuthForm = (props) => {
       >
         {isUser ? 'Need an account? Signup' : 'Already have an account? Login'}
       </Link>
+      <Toast />
     </form>
   );
 };

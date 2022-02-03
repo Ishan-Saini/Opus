@@ -1,54 +1,42 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import classes from './User.module.css';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, Route, Switch } from 'react-router-dom';
+import UserDetails from './UserDetails';
 import UserContext from '../../store/User-Context';
 import userInfo from '../../images/user-info.svg';
 import ChangePassword from './ChangePassword';
+import Toast from '../../components/UI/Toast/Toast';
 
 const User = () => {
-  const [isClicked, setIsClicked] = useState(false);
   const userCtx = useContext(UserContext);
   const history = useHistory();
 
-  if (!userCtx.isLoggedIn) return <Redirect to="/login" />;
-
-  const changePassBtnHandler = () => {
-    setIsClicked(true);
-  };
-
-  const cancelBtnHandler = () => {
-    setIsClicked(false);
-  };
-
-  const onCancelHandler = () => {
-    history.replace('/notebooks/');
-  };
+  if (!userCtx.isLoggedIn)
+    return (
+      <Redirect
+        to={{ pathname: '/login', state: { from: history.location.pathname } }}
+      />
+    );
 
   return (
-    <div className={`${classes['user-profile'] + ' user'}`}>
-      <div className={classes['svg-container']}>
-        <img src={userInfo} alt="user-info" className={classes['user-svg']} />
+    <React.Fragment>
+      <div className={`${classes['user-profile'] + ' user'}`}>
+        <div className={classes['svg-container']}>
+          <img src={userInfo} alt="user-info" className={classes['user-svg']} />
+        </div>
+        <div className={classes['user-info__container']}>
+          <Switch>
+            <Route path="/user" exact>
+              <UserDetails />
+            </Route>
+            <Route path="/user/changePassword" exact>
+              <ChangePassword />
+            </Route>
+          </Switch>
+        </div>
       </div>
-      <div className={classes['user-info__container']}>
-        {!isClicked && (
-          <div className={classes['user-info']}>
-            <span className={classes['user-info__field']}>NAME :</span>
-            <span>{userCtx.user.name}</span>
-            <span className={classes['user-info__field']}>EMAIL :</span>
-            <span>{userCtx.user.email}</span>
-            <div className={classes['user-info__btn']}>
-              <button type="button" onClick={changePassBtnHandler}>
-                CHANGE PASSWORD
-              </button>
-              <button type="button" onClick={onCancelHandler}>
-                BACK
-              </button>
-            </div>
-          </div>
-        )}
-        {isClicked && <ChangePassword cancelBtn={cancelBtnHandler} />}
-      </div>
-    </div>
+      <Toast />
+    </React.Fragment>
   );
 };
 

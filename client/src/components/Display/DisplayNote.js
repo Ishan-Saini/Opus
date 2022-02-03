@@ -70,7 +70,7 @@ const DisplayNote = (props) => {
       rendered = redraft(raw, { inline, blocks, entities }, options);
     }
 
-    if (note.tags) {
+    if (note.tags.length > 0) {
       tagsContent = note.tags.map((tag) => {
         return <span>{tag}</span>;
       });

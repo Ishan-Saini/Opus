@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Toast from '../UI/Toast/Toast';
 import classes from './Notes.module.css';
 import NotesHeader from './NotesHeader';
 import Button from '../UI/Button';
@@ -32,15 +34,16 @@ const Editor = (props) => {
     const raw = convertToRaw(editorState.getCurrentContent());
     const tagsArr = tags.replace(/ /g, '').split(',');
 
-    if (title !== '' && tagsArr.length <= 3) {
+    if (title !== '') {
       // UX
       let noteId;
       const contentObj = {
         title,
-        tags: tagsArr,
         content: raw,
         notebook: nbId,
+        ...(tags !== '' && { tags: tagsArr }),
       };
+
       try {
         const res = await axios({
           method: 'POST',
@@ -53,13 +56,13 @@ const Editor = (props) => {
         console.log(err);
       }
       history.push(`/notebooks/${nbId}/notes/${noteId}`);
-    }
+    } else if (title === '') toast.error('Title is required!');
   };
 
   const history = useHistory();
 
   const cancelBtnHandler = () => {
-    history.replace('/notebooks');
+    history.replace(`/notebooks/${nbId}`);
   };
 
   return (
@@ -86,6 +89,7 @@ const Editor = (props) => {
           Cancel
         </Button>
       </div>
+      <Toast />
     </form>
   );
 };

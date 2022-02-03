@@ -60,13 +60,15 @@ const NotesTiles = (props) => {
               <div className={classes.titleWrapper}>
                 <p className={classes['notes-tile__title']}>{tile.title}</p>
               </div>
-              <div className={classes.tagsWrapper}>
-                {tile.tags.map((tag, index) => (
-                  <span key={index} className={classes['notes-tile__tags']}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              {tile.tags.length > 0 && (
+                <div className={classes.tagsWrapper}>
+                  {tile.tags.map((tag, index) => (
+                    <span key={index} className={classes['notes-tile__tags']}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
               <div className={classes.openBtnWrapper} onClick={noteOpenHandler}>
                 <IoOpenOutline className={classes['tile-btn']} />
               </div>

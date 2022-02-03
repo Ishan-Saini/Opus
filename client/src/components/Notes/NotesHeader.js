@@ -21,7 +21,7 @@ const NotesHeader = (props) => {
       />
       <input
         className={classes.input}
-        placeholder="TAGS (max. 3)"
+        placeholder="TAGS"
         type="text"
         value={props.tagsValue}
         onChange={tagsHandler}

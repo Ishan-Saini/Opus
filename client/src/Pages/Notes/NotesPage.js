@@ -1,4 +1,6 @@
 import React from 'react';
+import { toast } from 'react-toastify';
+import Toast from '../../components/UI/Toast/Toast';
 import { useHistory, useParams } from 'react-router-dom';
 import classes from './NotesPage.module.css';
 import productiveMan from '../../images/productive-man.svg';
@@ -10,7 +12,10 @@ const NotesPage = (props) => {
   const { nbId } = useParams();
 
   const newNoteBtnHandler = () => {
-    if (!nbId) return; // UX
+    if (!nbId) {
+      toast.error('Please select a notebook!');
+      return;
+    }
     history.push(`/notebooks/${nbId}/editor`);
   };
 
@@ -28,6 +33,7 @@ const NotesPage = (props) => {
           />
         </IconContext.Provider>
       </div>
+      <Toast />
     </div>
   );
 
