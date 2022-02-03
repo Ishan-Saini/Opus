@@ -8,7 +8,10 @@ router
   .get(noteController.getAllNotes)
   .post(noteController.createNote);
 
-router.route('/:id').get(noteController.getNote);
+router
+  .route('/:id')
+  .get(noteController.getNote)
+  .delete(noteController.deleteNote);
 // .patch(noteController.updateNotebook)
 // .delete(noteController.deleteNotebook);
 

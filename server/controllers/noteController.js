@@ -41,3 +41,16 @@ exports.createNote = asyncUtility(async (req, res, next) => {
     },
   });
 });
+
+exports.deleteNote = asyncUtility(async (req, res, next) => {
+  const note = await Note.findByIdAndDelete(req.params.id);
+
+  if (!note) {
+    next(new ErrorUtility('No note with that id was found', 404));
+  }
+
+  res.status(204).json({
+    status: 'success',
+    message: 'successfully deleted',
+  });
+});
