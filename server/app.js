@@ -1,3 +1,4 @@
+const compression = require('compression');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -35,10 +36,9 @@ app.use(
 // Body parser
 app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
-
 app.use(mongoSanitize());
-
 app.use(xss());
+app.use(compression());
 
 app.use('/api/v1/notebooks', authController.protect, notebookRouter);
 app.use('/api/v1/users', userRouter);
