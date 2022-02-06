@@ -181,7 +181,7 @@ exports.updatePassword = asyncUtility(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
 
   if (!(await user.checkPassword(req.body.currentPassword, user.password)))
-    return next(new ErrorUtility('Password is incorrect.', 401));
+    return next(new ErrorUtility('Password is incorrect', 401));
 
   user.password = req.body.newPassword;
   user.passwordConfirm = req.body.confirmPassword;
