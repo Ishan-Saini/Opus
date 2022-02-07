@@ -40,6 +40,10 @@ app.use(mongoSanitize());
 app.use(xss());
 app.use(compression());
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 app.use('/api/v1/notebooks', authController.protect, notebookRouter);
 app.use('/api/v1/users', userRouter);
 
