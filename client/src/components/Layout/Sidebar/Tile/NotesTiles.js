@@ -23,7 +23,7 @@ const NotesTiles = (props) => {
 
     await axios({
       method: 'DELETE',
-      url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/${id}`,
+      url: `/api/v1/notebooks/${nbId}/notes/${id}`,
       withCredentials: true,
     });
 

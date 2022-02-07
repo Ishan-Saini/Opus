@@ -37,7 +37,7 @@ const DisplayNote = (props) => {
         setIsLoading(true);
         const res = await axios({
           method: 'GET',
-          url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/${noteId}`,
+          url: `/api/v1/notebooks/${nbId}/notes/${noteId}`,
           withCredentials: true,
         });
         setIsLoading(false);

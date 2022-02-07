@@ -21,7 +21,7 @@ const ChangePassword = (props) => {
     try {
       await axios({
         method: 'PATCH',
-        url: 'http://127.0.0.1:5000/api/v1/users/updatePassword',
+        url: '/api/v1/users/updatePassword',
         withCredentials: true,
         data: {
           currentPassword: passwordState.currentPassword,

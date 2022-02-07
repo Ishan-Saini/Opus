@@ -15,7 +15,7 @@ const NotebookTile = (props) => {
   const deleteNbHandler = async (e) => {
     const id = e.currentTarget.parentNode.parentNode.dataset.nbid;
     await axios({
-      url: `http://127.0.0.1:5000/api/v1/notebooks/${id}`,
+      url: `/api/v1/notebooks/${id}`,
       method: 'DELETE',
       withCredentials: true,
     });

@@ -19,6 +19,7 @@
     "redraft": "^0.10.2",
     "web-vitals": "^1.1.2"
   },
+  "proxy": "http://127.0.0.1:5000",
   "scripts": {
     "start": "HOST=127.0.0.1 react-scripts start",
     "build": "react-scripts build",

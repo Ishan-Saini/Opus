@@ -35,7 +35,7 @@ const Sidebar = (props) => {
 
         const res = await axios({
           method: 'GET',
-          url: 'http://127.0.0.1:5000/api/v1/notebooks/',
+          url: '/api/v1/notebooks/',
           withCredentials: true,
         });
         const nbObjData = res.data.data;
@@ -64,7 +64,7 @@ const Sidebar = (props) => {
         setIsNotesLoading(true);
         const res = await axios({
           method: 'GET',
-          url: `http://127.0.0.1:5000/api/v1/notebooks/${nbId}/notes/`,
+          url: `/api/v1/notebooks/${nbId}/notes/`,
           withCredentials: true,
         });
         const notesData = res.data.data;
