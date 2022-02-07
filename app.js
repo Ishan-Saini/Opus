@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
+const path = require('path');
 const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
 
@@ -41,7 +42,11 @@ app.use(xss());
 app.use(compression());
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(__dirname, 'client/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
 }
 
 app.use('/api/v1/notebooks', authController.protect, notebookRouter);
