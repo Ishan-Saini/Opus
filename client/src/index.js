@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -9,9 +9,9 @@ import { UserContextProvider } from './store/User-Context';
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
-      <HashRouter>
+      <BrowserRouter>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </UserContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
