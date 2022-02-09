@@ -41,22 +41,34 @@
 @media screen and (max-width: 768px) {
   .landingPage {
     grid-template-columns: 100%;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: 5vh 20vh 1fr;
   }
 
   .landing-svg__container {
     grid-column: 1 / span 1;
-    grid-row: 2 / span 1;
+    position: relative;
+    height: 100%;
+  }
+
+  .landing-svg__container > img {
+    max-width: 12rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .landing-text__container {
-    grid-column: 1 / span 1;
-    grid-row: 3 / span 1;
+    display: none;
+  }
+
+  .landing-text__container h1 {
+    margin-bottom: 0.5rem;
   }
 
   .landing-form__container {
-    grid-row: 4 / span 3;
+    grid-row: 3 / span 1;
     grid-column: 1 / span 1;
-    position: relative;
+    background-color: #d8d8d8;
   }
 }

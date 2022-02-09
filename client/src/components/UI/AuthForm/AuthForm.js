@@ -58,7 +58,11 @@ const AuthForm = (props) => {
   };
 
   return (
-    <form className={classes.loginForm} onSubmit={authSubmitHandler}>
+    <form
+      autoComplete="off"
+      className={classes.loginForm}
+      onSubmit={authSubmitHandler}
+    >
       {!isUser && <h1>Welcome aboard!</h1>}
       {isUser && <h1>Welcome back!</h1>}
       {!isUser && (

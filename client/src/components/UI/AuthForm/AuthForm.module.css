@@ -79,9 +79,6 @@
   .loginForm {
     height: 100%;
     padding: 1rem 0;
-    position: absolute;
-    top: 55%;
-    transform: translateY(-50%);
   }
 
   .inputBox {
