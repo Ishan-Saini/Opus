@@ -6,7 +6,6 @@
 
 .loginForm h1 {
   margin-bottom: 1.5rem;
-  font-size: 2rem;
 }
 
 .inputBox {
@@ -74,4 +73,45 @@
 
 .submitBtn:hover {
   background: rgba(0, 0, 0, 0.822);
+}
+
+@media screen and (max-width: 768px) {
+  .loginForm {
+    height: 100%;
+    padding: 1rem 0;
+    position: absolute;
+    top: 55%;
+    transform: translateY(-50%);
+  }
+
+  .inputBox {
+    height: 1.7rem;
+    margin-top: 0.1rem;
+    padding: 0.25rem;
+    font-size: 0.7rem;
+    border: 0.1rem solid #888888;
+  }
+
+  .inputBox:not(:last-of-type) {
+    margin-bottom: 0.6rem;
+  }
+
+  .label {
+    font-size: 0.7rem;
+  }
+
+  .reset-link {
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+  }
+
+  .switch-link {
+    margin: 0.5rem 0;
+    font-size: 0.7rem;
+  }
+
+  .submitBtn {
+    margin-top: 1rem;
+    height: 1.7rem;
+  }
 }
