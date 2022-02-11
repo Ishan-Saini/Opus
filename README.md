@@ -4,8 +4,7 @@
 [![Visit](https://img.shields.io/static/v1?label=VISIT&message=HERE&color=brightgreen)](https://opus-notebook.herokuapp.com/)
 
 
-
-![Opus Screenshot](https://i.ibb.co/tB8hh3H/opus1.png)
+![opus1](https://user-images.githubusercontent.com/54525602/153537677-73f3986e-3ace-413e-9fbc-6e8998ed95dd.png)
 
 
 A notebook which stores your notes in an organized manner.
